@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Splitwise.DomainModel.Models
 {
-    class Expense
+    public class Expense
     {
         public int expenseId { get; set; }
         public string  expenseName { get; set; }

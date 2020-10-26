@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Splitwise.DomainModel.Models
 {
-    class Payer
+    public class Payer
     {
+        public int Id { get; set; }
         public int expenseId { get; set; }
         [ForeignKey("expenseId")]
         public Expense expense { get; set; }

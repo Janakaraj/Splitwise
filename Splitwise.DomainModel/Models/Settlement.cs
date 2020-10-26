@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Splitwise.DomainModel.Models
 {
-    class Settlement
+    public class Settlement
     {
         public int settlementId { get; set; }
-        public int settlementGroupId { get; set; }
+        public int? settlementGroupId { get; set; }
         [ForeignKey("settlementGroupId")]
         public Group group { get; set; }
         public string userPayingId { get; set; }

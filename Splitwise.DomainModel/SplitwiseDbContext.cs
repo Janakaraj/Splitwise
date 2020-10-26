@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Splitwise.DomainModel
 {
-    class SplitwiseDbContext : IdentityDbContext<User>
+    public class SplitwiseDbContext : IdentityDbContext<User>
     {
         public SplitwiseDbContext(DbContextOptions<SplitwiseDbContext> options) : base(options)
         {

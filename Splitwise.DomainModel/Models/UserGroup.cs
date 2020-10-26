@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Splitwise.DomainModel.Models
 {
-    class UserGroup
-    {   
+    public class UserGroup
+    {
+        public int Id { get; set; }
         public string userId { get; set; }
         [ForeignKey("userId")]
         public User user { get; set; }
