@@ -8,10 +8,11 @@ namespace Splitwise.Repository.GroupRepository
 {
     interface IGroupRepository
     {
-        Task<IEnumerable<GroupAC>> GetGroups();
-        Task<GroupAC> GetGroup();
+        Task<IEnumerable<GroupAC>> GetGroups(string userEmail);
+        Task<GroupAC> GetGroup(int groupId);
         Task CreateGroup(GroupAC group);
         Task UpdateGroup(GroupAC group);
         Task DeleteGroup(int id);
+        bool GroupExists(int groupId);
     }
 }
