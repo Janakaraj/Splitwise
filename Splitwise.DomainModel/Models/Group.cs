@@ -7,10 +7,10 @@ namespace Splitwise.DomainModel.Models
 {
     public class Group
     {
-        public int groupId { get; set; }
-        public string groupName { get; set; }
-        public string groupCreatorId { get; set; }
-        [ForeignKey("groupCreatorId")]
-        public User groupCreator { get; set; }
+        public int GroupId { get; set; }
+        public string GroupName { get; set; }
+        public string GroupCreatorId { get; set; }
+        [ForeignKey("GroupCreatorId")]
+        public User GroupCreator { get; set; }
     }
 }

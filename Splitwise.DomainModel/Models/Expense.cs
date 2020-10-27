@@ -7,17 +7,17 @@ namespace Splitwise.DomainModel.Models
 {
     public class Expense
     {
-        public int expenseId { get; set; }
-        public string  expenseName { get; set; }
-        public double expenseTotalAmount { get; set; }
-        public int expenseGroupId { get; set; }
-        [ForeignKey("expenseGroupId")]
-        public Group expenseGroup { get; set; }
-        public string expenseSplitBy { get; set; }
-        public string expenseDescription { get; set; }
-        public string expenseCurrency { get; set; }
-        public string expenseAdderId { get; set; }
-        [ForeignKey("expenseAdderId")]
-        public User expenseAdder { get; set; }
+        public int ExpenseId { get; set; }
+        public string  ExpenseName { get; set; }
+        public double ExpenseTotalAmount { get; set; }
+        public int ExpenseGroupId { get; set; }
+        [ForeignKey("ExpenseGroupId")]
+        public Group ExpenseGroup { get; set; }
+        public string ExpenseSplitBy { get; set; }
+        public string ExpenseDescription { get; set; }
+        public string ExpenseCurrency { get; set; }
+        public string ExpenseAdderId { get; set; }
+        [ForeignKey("ExpenseAdderId")]
+        public User ExpenseAdder { get; set; }
     }
 }

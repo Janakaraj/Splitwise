@@ -8,12 +8,12 @@ namespace Splitwise.DomainModel.Models
     public class Payee
     {
         public int Id { get; set; }
-        public int expenseId { get; set; }
-        [ForeignKey("expenseId")]
-        public Expense expense { get; set; }
-        public string payeeId { get; set; }
-        [ForeignKey("payeeId")]
-        public User payee { get; set; }
-        public double payeeShare { get; set; }
+        public int ExpenseId { get; set; }
+        [ForeignKey("ExpenseId")]
+        public Expense Expense { get; set; }
+        public string PayeeId { get; set; }
+        [ForeignKey("PayeeId")]
+        public User PayeeUser { get; set; }
+        public double PayeeShare { get; set; }
     }
 }

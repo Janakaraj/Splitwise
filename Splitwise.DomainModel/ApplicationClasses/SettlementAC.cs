@@ -4,17 +4,17 @@ using System.Text;
 
 namespace Splitwise.DomainModel.ApplicationClasses
 {
-    class SettlementAC
+    public class SettlementAC
     {
-        public int settlementId { get; set; }
-        public int? settlementGroupId { get; set; }
-        public GroupAC group { get; set; }
-        public string userPayingId { get; set; }
-        public UserAC userPaying { get; set; }
-        public string userRecievingId { get; set; }
-        public UserAC userRecieving { get; set; }
-        public int settlementExpenseId { get; set; }
-        public ExpenseAC settlementExpense { get; set; }
-        public double transactionAmount { get; set; }
+        public int SettlementId { get; set; }
+        public int? SettlementGroupId { get; set; }
+        public GroupAC Group { get; set; }
+        public string UserPayingId { get; set; }
+        public UserAC UserPaying { get; set; }
+        public string UserRecievingId { get; set; }
+        public UserAC UserRecieving { get; set; }
+        public int SettlementExpenseId { get; set; }
+        public ExpenseAC SettlementExpense { get; set; }
+        public double TransactionAmount { get; set; }
     }
 }

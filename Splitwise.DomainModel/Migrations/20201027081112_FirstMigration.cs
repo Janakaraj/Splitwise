@@ -40,7 +40,7 @@ namespace Splitwise.DomainModel.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    userFullName = table.Column<string>(nullable: true)
+                    UserFullName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -154,198 +154,198 @@ namespace Splitwise.DomainModel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Friend",
+                name: "Friends",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<string>(nullable: true),
-                    userFriendId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    UserFriendId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Friend", x => x.Id);
+                    table.PrimaryKey("PK_Friends", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Friend_AspNetUsers_userFriendId",
-                        column: x => x.userFriendId,
+                        name: "FK_Friends_AspNetUsers_UserFriendId",
+                        column: x => x.UserFriendId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Friend_AspNetUsers_userId",
-                        column: x => x.userId,
+                        name: "FK_Friends_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Group",
+                name: "Groups",
                 columns: table => new
                 {
-                    groupId = table.Column<int>(nullable: false)
+                    GroupId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    groupName = table.Column<string>(nullable: true),
-                    groupCreatorId = table.Column<string>(nullable: true)
+                    GroupName = table.Column<string>(nullable: true),
+                    GroupCreatorId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Group", x => x.groupId);
+                    table.PrimaryKey("PK_Groups", x => x.GroupId);
                     table.ForeignKey(
-                        name: "FK_Group_AspNetUsers_groupCreatorId",
-                        column: x => x.groupCreatorId,
+                        name: "FK_Groups_AspNetUsers_GroupCreatorId",
+                        column: x => x.GroupCreatorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Expense",
+                name: "Expenses",
                 columns: table => new
                 {
-                    expenseId = table.Column<int>(nullable: false)
+                    ExpenseId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    expenseName = table.Column<string>(nullable: true),
-                    expenseTotalAmount = table.Column<double>(nullable: false),
-                    expenseGroupId = table.Column<int>(nullable: false),
-                    expenseSplitBy = table.Column<string>(nullable: true),
-                    expenseDescription = table.Column<string>(nullable: true),
-                    expenseCurrency = table.Column<string>(nullable: true),
-                    expenseAdderId = table.Column<string>(nullable: true)
+                    ExpenseName = table.Column<string>(nullable: true),
+                    ExpenseTotalAmount = table.Column<double>(nullable: false),
+                    ExpenseGroupId = table.Column<int>(nullable: false),
+                    ExpenseSplitBy = table.Column<string>(nullable: true),
+                    ExpenseDescription = table.Column<string>(nullable: true),
+                    ExpenseCurrency = table.Column<string>(nullable: true),
+                    ExpenseAdderId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Expense", x => x.expenseId);
+                    table.PrimaryKey("PK_Expenses", x => x.ExpenseId);
                     table.ForeignKey(
-                        name: "FK_Expense_AspNetUsers_expenseAdderId",
-                        column: x => x.expenseAdderId,
+                        name: "FK_Expenses_AspNetUsers_ExpenseAdderId",
+                        column: x => x.ExpenseAdderId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Expense_Group_expenseGroupId",
-                        column: x => x.expenseGroupId,
-                        principalTable: "Group",
-                        principalColumn: "groupId",
+                        name: "FK_Expenses_Groups_ExpenseGroupId",
+                        column: x => x.ExpenseGroupId,
+                        principalTable: "Groups",
+                        principalColumn: "GroupId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserGroup",
+                name: "UserGroups",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userId = table.Column<string>(nullable: true),
-                    groupId = table.Column<int>(nullable: false)
+                    UserId = table.Column<string>(nullable: true),
+                    GroupId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserGroup", x => x.Id);
+                    table.PrimaryKey("PK_UserGroups", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserGroup_Group_groupId",
-                        column: x => x.groupId,
-                        principalTable: "Group",
-                        principalColumn: "groupId",
+                        name: "FK_UserGroups_Groups_GroupId",
+                        column: x => x.GroupId,
+                        principalTable: "Groups",
+                        principalColumn: "GroupId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserGroup_AspNetUsers_userId",
-                        column: x => x.userId,
+                        name: "FK_UserGroups_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payee",
+                name: "Payees",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    expenseId = table.Column<int>(nullable: false),
-                    payeeId = table.Column<string>(nullable: true),
-                    payeeShare = table.Column<double>(nullable: false)
+                    ExpenseId = table.Column<int>(nullable: false),
+                    PayeeId = table.Column<string>(nullable: true),
+                    PayeeShare = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payee", x => x.Id);
+                    table.PrimaryKey("PK_Payees", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payee_Expense_expenseId",
-                        column: x => x.expenseId,
-                        principalTable: "Expense",
-                        principalColumn: "expenseId",
+                        name: "FK_Payees_Expenses_ExpenseId",
+                        column: x => x.ExpenseId,
+                        principalTable: "Expenses",
+                        principalColumn: "ExpenseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Payee_AspNetUsers_payeeId",
-                        column: x => x.payeeId,
+                        name: "FK_Payees_AspNetUsers_PayeeId",
+                        column: x => x.PayeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payer",
+                name: "Payers",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    expenseId = table.Column<int>(nullable: false),
-                    payerId = table.Column<string>(nullable: true),
-                    amountPaid = table.Column<double>(nullable: false)
+                    ExpenseId = table.Column<int>(nullable: false),
+                    PayerId = table.Column<string>(nullable: true),
+                    AmountPaid = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payer", x => x.Id);
+                    table.PrimaryKey("PK_Payers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payer_Expense_expenseId",
-                        column: x => x.expenseId,
-                        principalTable: "Expense",
-                        principalColumn: "expenseId",
+                        name: "FK_Payers_Expenses_ExpenseId",
+                        column: x => x.ExpenseId,
+                        principalTable: "Expenses",
+                        principalColumn: "ExpenseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Payer_AspNetUsers_payerId",
-                        column: x => x.payerId,
+                        name: "FK_Payers_AspNetUsers_PayerId",
+                        column: x => x.PayerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Settlement",
+                name: "Settlements",
                 columns: table => new
                 {
-                    settlementId = table.Column<int>(nullable: false)
+                    SettlementId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    settlementGroupId = table.Column<int>(nullable: true),
-                    userPayingId = table.Column<string>(nullable: true),
-                    userRecievingId = table.Column<string>(nullable: true),
-                    settlementExpenseId = table.Column<int>(nullable: false),
-                    transactionAmount = table.Column<double>(nullable: false)
+                    SettlementGroupId = table.Column<int>(nullable: true),
+                    UserPayingId = table.Column<string>(nullable: true),
+                    UserRecievingId = table.Column<string>(nullable: true),
+                    SettlementExpenseId = table.Column<int>(nullable: false),
+                    TransactionAmount = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Settlement", x => x.settlementId);
+                    table.PrimaryKey("PK_Settlements", x => x.SettlementId);
                     table.ForeignKey(
-                        name: "FK_Settlement_Expense_settlementExpenseId",
-                        column: x => x.settlementExpenseId,
-                        principalTable: "Expense",
-                        principalColumn: "expenseId",
+                        name: "FK_Settlements_Expenses_SettlementExpenseId",
+                        column: x => x.SettlementExpenseId,
+                        principalTable: "Expenses",
+                        principalColumn: "ExpenseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Settlement_Group_settlementGroupId",
-                        column: x => x.settlementGroupId,
-                        principalTable: "Group",
-                        principalColumn: "groupId",
+                        name: "FK_Settlements_Groups_SettlementGroupId",
+                        column: x => x.SettlementGroupId,
+                        principalTable: "Groups",
+                        principalColumn: "GroupId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Settlement_AspNetUsers_userPayingId",
-                        column: x => x.userPayingId,
+                        name: "FK_Settlements_AspNetUsers_UserPayingId",
+                        column: x => x.UserPayingId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Settlement_AspNetUsers_userRecievingId",
-                        column: x => x.userRecievingId,
+                        name: "FK_Settlements_AspNetUsers_UserRecievingId",
+                        column: x => x.UserRecievingId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -391,79 +391,79 @@ namespace Splitwise.DomainModel.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Expense_expenseAdderId",
-                table: "Expense",
-                column: "expenseAdderId");
+                name: "IX_Expenses_ExpenseAdderId",
+                table: "Expenses",
+                column: "ExpenseAdderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Expense_expenseGroupId",
-                table: "Expense",
-                column: "expenseGroupId");
+                name: "IX_Expenses_ExpenseGroupId",
+                table: "Expenses",
+                column: "ExpenseGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Friend_userFriendId",
-                table: "Friend",
-                column: "userFriendId");
+                name: "IX_Friends_UserFriendId",
+                table: "Friends",
+                column: "UserFriendId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Friend_userId",
-                table: "Friend",
-                column: "userId");
+                name: "IX_Friends_UserId",
+                table: "Friends",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Group_groupCreatorId",
-                table: "Group",
-                column: "groupCreatorId");
+                name: "IX_Groups_GroupCreatorId",
+                table: "Groups",
+                column: "GroupCreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payee_expenseId",
-                table: "Payee",
-                column: "expenseId");
+                name: "IX_Payees_ExpenseId",
+                table: "Payees",
+                column: "ExpenseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payee_payeeId",
-                table: "Payee",
-                column: "payeeId");
+                name: "IX_Payees_PayeeId",
+                table: "Payees",
+                column: "PayeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payer_expenseId",
-                table: "Payer",
-                column: "expenseId");
+                name: "IX_Payers_ExpenseId",
+                table: "Payers",
+                column: "ExpenseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payer_payerId",
-                table: "Payer",
-                column: "payerId");
+                name: "IX_Payers_PayerId",
+                table: "Payers",
+                column: "PayerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Settlement_settlementExpenseId",
-                table: "Settlement",
-                column: "settlementExpenseId");
+                name: "IX_Settlements_SettlementExpenseId",
+                table: "Settlements",
+                column: "SettlementExpenseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Settlement_settlementGroupId",
-                table: "Settlement",
-                column: "settlementGroupId");
+                name: "IX_Settlements_SettlementGroupId",
+                table: "Settlements",
+                column: "SettlementGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Settlement_userPayingId",
-                table: "Settlement",
-                column: "userPayingId");
+                name: "IX_Settlements_UserPayingId",
+                table: "Settlements",
+                column: "UserPayingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Settlement_userRecievingId",
-                table: "Settlement",
-                column: "userRecievingId");
+                name: "IX_Settlements_UserRecievingId",
+                table: "Settlements",
+                column: "UserRecievingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGroup_groupId",
-                table: "UserGroup",
-                column: "groupId");
+                name: "IX_UserGroups_GroupId",
+                table: "UserGroups",
+                column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGroup_userId",
-                table: "UserGroup",
-                column: "userId");
+                name: "IX_UserGroups_UserId",
+                table: "UserGroups",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -484,28 +484,28 @@ namespace Splitwise.DomainModel.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Friend");
+                name: "Friends");
 
             migrationBuilder.DropTable(
-                name: "Payee");
+                name: "Payees");
 
             migrationBuilder.DropTable(
-                name: "Payer");
+                name: "Payers");
 
             migrationBuilder.DropTable(
-                name: "Settlement");
+                name: "Settlements");
 
             migrationBuilder.DropTable(
-                name: "UserGroup");
+                name: "UserGroups");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Expense");
+                name: "Expenses");
 
             migrationBuilder.DropTable(
-                name: "Group");
+                name: "Groups");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

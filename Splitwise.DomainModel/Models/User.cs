@@ -7,6 +7,6 @@ namespace Splitwise.DomainModel.Models
 {
     public class User : IdentityUser
     {
-        public string userFullName { get; set; }
+        public string UserFullName { get; set; }
     }
 }

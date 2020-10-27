@@ -13,12 +13,12 @@ namespace Splitwise.DomainModel
         {
 
         }
-        public DbSet<Group> Group { get; set; }
-        public DbSet<UserGroup> UserGroup { get; set; }
-        public DbSet<Friend> Friend { get; set; }
-        public DbSet<Expense> Expense { get; set; }
-        public DbSet<Payer> Payer { get; set; }
-        public DbSet<Payee> Payee { get; set; }
-        public DbSet<Settlement> Settlement { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<UserGroup> UserGroups { get; set; }
+        public DbSet<Friend> Friends { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Payer> Payers { get; set; }
+        public DbSet<Payee> Payees { get; set; }
+        public DbSet<Settlement> Settlements { get; set; }
     }
 }

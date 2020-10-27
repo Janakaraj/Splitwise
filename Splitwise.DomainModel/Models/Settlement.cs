@@ -7,20 +7,20 @@ namespace Splitwise.DomainModel.Models
 {
     public class Settlement
     {
-        public int settlementId { get; set; }
-        public int? settlementGroupId { get; set; }
-        [ForeignKey("settlementGroupId")]
-        public Group group { get; set; }
-        public string userPayingId { get; set; }
-        [ForeignKey("userPayingId")]
-        public User userPaying { get; set; }
-        public string userRecievingId { get; set; }
-        [ForeignKey("userRecievingId")]
-        public User userRecieving { get; set; }
-        public int settlementExpenseId { get; set; }
-        [ForeignKey("settlementExpenseId")]
-        public Expense settlementExpense { get; set; }
-        public double transactionAmount { get; set; }
+        public int SettlementId { get; set; }
+        public int? SettlementGroupId { get; set; }
+        [ForeignKey("SettlementGroupId")]
+        public Group Group { get; set; }
+        public string UserPayingId { get; set; }
+        [ForeignKey("UserPayingId")]
+        public User UserPaying { get; set; }
+        public string UserRecievingId { get; set; }
+        [ForeignKey("UserRecievingId")]
+        public User UserRecieving { get; set; }
+        public int SettlementExpenseId { get; set; }
+        [ForeignKey("SettlementExpenseId")]
+        public Expense SettlementExpense { get; set; }
+        public double TransactionAmount { get; set; }
 
     }
 }

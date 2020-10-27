@@ -152,39 +152,39 @@ namespace Splitwise.DomainModel.Migrations
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Expense", b =>
                 {
-                    b.Property<int>("expenseId")
+                    b.Property<int>("ExpenseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("expenseAdderId")
+                    b.Property<string>("ExpenseAdderId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("expenseCurrency")
+                    b.Property<string>("ExpenseCurrency")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("expenseDescription")
+                    b.Property<string>("ExpenseDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("expenseGroupId")
+                    b.Property<int>("ExpenseGroupId")
                         .HasColumnType("int");
 
-                    b.Property<string>("expenseName")
+                    b.Property<string>("ExpenseName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("expenseSplitBy")
+                    b.Property<string>("ExpenseSplitBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("expenseTotalAmount")
+                    b.Property<double>("ExpenseTotalAmount")
                         .HasColumnType("float");
 
-                    b.HasKey("expenseId");
+                    b.HasKey("ExpenseId");
 
-                    b.HasIndex("expenseAdderId");
+                    b.HasIndex("ExpenseAdderId");
 
-                    b.HasIndex("expenseGroupId");
+                    b.HasIndex("ExpenseGroupId");
 
-                    b.ToTable("Expense");
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Friend", b =>
@@ -194,39 +194,39 @@ namespace Splitwise.DomainModel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("userFriendId")
+                    b.Property<string>("UserFriendId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("userId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userFriendId");
+                    b.HasIndex("UserFriendId");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("Friend");
+                    b.ToTable("Friends");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Group", b =>
                 {
-                    b.Property<int>("groupId")
+                    b.Property<int>("GroupId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("groupCreatorId")
+                    b.Property<string>("GroupCreatorId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("groupName")
+                    b.Property<string>("GroupName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("groupId");
+                    b.HasKey("GroupId");
 
-                    b.HasIndex("groupCreatorId");
+                    b.HasIndex("GroupCreatorId");
 
-                    b.ToTable("Group");
+                    b.ToTable("Groups");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Payee", b =>
@@ -236,22 +236,22 @@ namespace Splitwise.DomainModel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("expenseId")
+                    b.Property<int>("ExpenseId")
                         .HasColumnType("int");
 
-                    b.Property<string>("payeeId")
+                    b.Property<string>("PayeeId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("payeeShare")
+                    b.Property<double>("PayeeShare")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("expenseId");
+                    b.HasIndex("ExpenseId");
 
-                    b.HasIndex("payeeId");
+                    b.HasIndex("PayeeId");
 
-                    b.ToTable("Payee");
+                    b.ToTable("Payees");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Payer", b =>
@@ -261,57 +261,57 @@ namespace Splitwise.DomainModel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("amountPaid")
+                    b.Property<double>("AmountPaid")
                         .HasColumnType("float");
 
-                    b.Property<int>("expenseId")
+                    b.Property<int>("ExpenseId")
                         .HasColumnType("int");
 
-                    b.Property<string>("payerId")
+                    b.Property<string>("PayerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("expenseId");
+                    b.HasIndex("ExpenseId");
 
-                    b.HasIndex("payerId");
+                    b.HasIndex("PayerId");
 
-                    b.ToTable("Payer");
+                    b.ToTable("Payers");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Settlement", b =>
                 {
-                    b.Property<int>("settlementId")
+                    b.Property<int>("SettlementId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("settlementExpenseId")
+                    b.Property<int>("SettlementExpenseId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("settlementGroupId")
+                    b.Property<int?>("SettlementGroupId")
                         .HasColumnType("int");
 
-                    b.Property<double>("transactionAmount")
+                    b.Property<double>("TransactionAmount")
                         .HasColumnType("float");
 
-                    b.Property<string>("userPayingId")
+                    b.Property<string>("UserPayingId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("userRecievingId")
+                    b.Property<string>("UserRecievingId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("settlementId");
+                    b.HasKey("SettlementId");
 
-                    b.HasIndex("settlementExpenseId");
+                    b.HasIndex("SettlementExpenseId");
 
-                    b.HasIndex("settlementGroupId");
+                    b.HasIndex("SettlementGroupId");
 
-                    b.HasIndex("userPayingId");
+                    b.HasIndex("UserPayingId");
 
-                    b.HasIndex("userRecievingId");
+                    b.HasIndex("UserRecievingId");
 
-                    b.ToTable("Settlement");
+                    b.ToTable("Settlements");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.User", b =>
@@ -362,12 +362,12 @@ namespace Splitwise.DomainModel.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserFullName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
-
-                    b.Property<string>("userFullName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -389,19 +389,19 @@ namespace Splitwise.DomainModel.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("groupId")
+                    b.Property<int>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<string>("userId")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("groupId");
+                    b.HasIndex("GroupId");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("UserGroup");
+                    b.ToTable("UserGroups");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -457,93 +457,93 @@ namespace Splitwise.DomainModel.Migrations
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Expense", b =>
                 {
-                    b.HasOne("Splitwise.DomainModel.Models.User", "expenseAdder")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "ExpenseAdder")
                         .WithMany()
-                        .HasForeignKey("expenseAdderId");
+                        .HasForeignKey("ExpenseAdderId");
 
-                    b.HasOne("Splitwise.DomainModel.Models.Group", "expenseGroup")
+                    b.HasOne("Splitwise.DomainModel.Models.Group", "ExpenseGroup")
                         .WithMany()
-                        .HasForeignKey("expenseGroupId")
+                        .HasForeignKey("ExpenseGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Friend", b =>
                 {
-                    b.HasOne("Splitwise.DomainModel.Models.User", "userFriend")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "UserFriend")
                         .WithMany()
-                        .HasForeignKey("userFriendId");
+                        .HasForeignKey("UserFriendId");
 
-                    b.HasOne("Splitwise.DomainModel.Models.User", "user")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Group", b =>
                 {
-                    b.HasOne("Splitwise.DomainModel.Models.User", "groupCreator")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "GroupCreator")
                         .WithMany()
-                        .HasForeignKey("groupCreatorId");
+                        .HasForeignKey("GroupCreatorId");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Payee", b =>
                 {
-                    b.HasOne("Splitwise.DomainModel.Models.Expense", "expense")
+                    b.HasOne("Splitwise.DomainModel.Models.Expense", "Expense")
                         .WithMany()
-                        .HasForeignKey("expenseId")
+                        .HasForeignKey("ExpenseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Splitwise.DomainModel.Models.User", "payee")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "PayeeUser")
                         .WithMany()
-                        .HasForeignKey("payeeId");
+                        .HasForeignKey("PayeeId");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Payer", b =>
                 {
-                    b.HasOne("Splitwise.DomainModel.Models.Expense", "expense")
+                    b.HasOne("Splitwise.DomainModel.Models.Expense", "Expense")
                         .WithMany()
-                        .HasForeignKey("expenseId")
+                        .HasForeignKey("ExpenseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Splitwise.DomainModel.Models.User", "payer")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "PayerUser")
                         .WithMany()
-                        .HasForeignKey("payerId");
+                        .HasForeignKey("PayerId");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.Settlement", b =>
                 {
-                    b.HasOne("Splitwise.DomainModel.Models.Expense", "settlementExpense")
+                    b.HasOne("Splitwise.DomainModel.Models.Expense", "SettlementExpense")
                         .WithMany()
-                        .HasForeignKey("settlementExpenseId")
+                        .HasForeignKey("SettlementExpenseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Splitwise.DomainModel.Models.Group", "group")
+                    b.HasOne("Splitwise.DomainModel.Models.Group", "Group")
                         .WithMany()
-                        .HasForeignKey("settlementGroupId");
+                        .HasForeignKey("SettlementGroupId");
 
-                    b.HasOne("Splitwise.DomainModel.Models.User", "userPaying")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "UserPaying")
                         .WithMany()
-                        .HasForeignKey("userPayingId");
+                        .HasForeignKey("UserPayingId");
 
-                    b.HasOne("Splitwise.DomainModel.Models.User", "userRecieving")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "UserRecieving")
                         .WithMany()
-                        .HasForeignKey("userRecievingId");
+                        .HasForeignKey("UserRecievingId");
                 });
 
             modelBuilder.Entity("Splitwise.DomainModel.Models.UserGroup", b =>
                 {
-                    b.HasOne("Splitwise.DomainModel.Models.Group", "group")
+                    b.HasOne("Splitwise.DomainModel.Models.Group", "Group")
                         .WithMany()
-                        .HasForeignKey("groupId")
+                        .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Splitwise.DomainModel.Models.User", "user")
+                    b.HasOne("Splitwise.DomainModel.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

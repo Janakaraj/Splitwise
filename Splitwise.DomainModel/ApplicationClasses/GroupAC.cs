@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Splitwise.DomainModel.ApplicationClasses
 {
-    class GroupAC
+    public class GroupAC
     {
-        public int groupId { get; set; }
-        public string groupName { get; set; }
-        public string groupCreatorId { get; set; }
-        public UserAC groupCreator { get; set; }
+        public int GroupId { get; set; }
+        public string GroupName { get; set; }
+        public string GroupCreatorId { get; set; }
+        public UserAC GroupCreator { get; set; }
     }
 }

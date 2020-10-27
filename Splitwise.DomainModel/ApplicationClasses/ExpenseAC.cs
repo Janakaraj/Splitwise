@@ -4,17 +4,17 @@ using System.Text;
 
 namespace Splitwise.DomainModel.ApplicationClasses
 {
-    class ExpenseAC
+    public class ExpenseAC
     {
-        public int expenseId { get; set; }
-        public string expenseName { get; set; }
-        public double expenseTotalAmount { get; set; }
-        public int expenseGroupId { get; set; }
-        public GroupAC expenseGroup { get; set; }
-        public string expenseSplitBy { get; set; }
-        public string expenseDescription { get; set; }
-        public string expenseCurrency { get; set; }
-        public string expenseAdderId { get; set; }
-        public UserAC expenseAdder { get; set; }
+        public int ExpenseId { get; set; }
+        public string ExpenseName { get; set; }
+        public double ExpenseTotalAmount { get; set; }
+        public int ExpenseGroupId { get; set; }
+        public GroupAC ExpenseGroup { get; set; }
+        public string ExpenseSplitBy { get; set; }
+        public string ExpenseDescription { get; set; }
+        public string ExpenseCurrency { get; set; }
+        public string ExpenseAdderId { get; set; }
+        public UserAC ExpenseAdder { get; set; }
     }
 }
