@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.FriendRepository
 {
-    interface IFriendRepository
+    public interface IFriendRepository
     {
         Task<UserAC> GetFriend(string friendEmail);
         Task<IEnumerable<UserAC>> GetFriends(string userEmail);

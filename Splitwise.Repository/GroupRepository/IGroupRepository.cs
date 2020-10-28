@@ -6,7 +6,7 @@ using Splitwise.DomainModel.ApplicationClasses;
 
 namespace Splitwise.Repository.GroupRepository
 {
-    interface IGroupRepository
+    public interface IGroupRepository
     {
         Task<IEnumerable<GroupAC>> GetGroups(string userEmail);
         Task<GroupAC> GetGroup(int groupId);

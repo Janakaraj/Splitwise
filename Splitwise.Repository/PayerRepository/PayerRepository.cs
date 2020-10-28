@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.PayerRepository
 {
-    class PayerRepository : IPayerRepository
+    public class PayerRepository : IPayerRepository
     {
         public Task AddPayer(PayerAC payer)
         {

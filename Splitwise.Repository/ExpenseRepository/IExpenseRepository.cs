@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.ExpenseRepository
 {
-    interface IExpenseRepository
+    public interface IExpenseRepository
     {
         Task<IEnumerable<ExpenseAC>> GetExpensesByGroupId(int groupId);
         Task<ExpenseAC> GetExpense(int expenseId);

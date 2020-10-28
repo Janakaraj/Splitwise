@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.SettlementRepository
 {
-    interface ISettlementRepository
+    public interface ISettlementRepository
     {
         Task <IEnumerable<SettlementAC>> GetSettlementsByUserId(string userId);
         Task <IEnumerable<SettlementAC>> GetSettlementsByGroupId(int groupId);

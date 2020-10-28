@@ -1,4 +1,5 @@
-﻿using Splitwise.DomainModel.ApplicationClasses;
+﻿using Microsoft.AspNetCore.Identity;
+using Splitwise.DomainModel.ApplicationClasses;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.UserRepository
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
-        Task<IEnumerable<UserAC>> GetUsers();
-        Task<IEnumerable<UserAC>> GetAllFriends(string userId);
+        IEnumerable<UserAC> GetUsers();
         Task<UserAC> GetUser(string userId);
-        Task<UserAC> GetUserByEmail(string userEmail);
-        Task CreateUser(UserAC user);
-        void UpdateUser(UserAC user);
+        Task<UserAC> GetUserByEmailAsync(string userEmail);
+        Task<IdentityResult> RegisterUser(RegisterUserAC user);
+        Task UpdateUser(UserAC user);
         Task DeleteUser(UserAC user);
-        bool UserExists(string userId);
+        bool UserExists(string userEmail);
     }
 }

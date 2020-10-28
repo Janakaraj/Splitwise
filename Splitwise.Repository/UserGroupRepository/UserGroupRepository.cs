@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.UserGroupRepository
 {
-    class UserGroupRepository : IUserGroupRepository
+    public class UserGroupRepository : IUserGroupRepository
     {
         public Task AddUserToGroup(string userId, int groupId)
         {

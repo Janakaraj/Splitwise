@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.UserGroupRepository
 {
-    interface IUserGroupRepository
+    public interface IUserGroupRepository
     {
         Task<IEnumerable<UserAC>> GetGroupMembersByGroupId(int groupId);
         Task<IEnumerable<GroupAC>> GetUserGroupsByUserId(string userId);

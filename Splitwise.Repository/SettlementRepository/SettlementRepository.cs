@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.SettlementRepository
 {
-    class SettlementRepository : ISettlementRepository
+    public class SettlementRepository : ISettlementRepository
     {
         public Task AddSettlement(SettlementAC settlement)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Splitwise.Repository.ExpenseRepository
 {
-    class ExpenseRepository : IExpenseRepository
+    public class ExpenseRepository : IExpenseRepository
     {
         public Task AddExpense(ExpenseAC expense)
         {
