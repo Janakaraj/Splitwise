@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Splitwise.DomainModel;
 using Splitwise.DomainModel.ApplicationClasses;
 using Splitwise.DomainModel.Models;
 using Splitwise.Repository.UserRepository;
@@ -27,23 +21,40 @@ namespace Splitwise.Core.Controller
                this._userManager = userManager;
                this._userRepository = userRepository;
             }
+            //POST: api/user/register
             [HttpPost]
             [Route("register")]
             public async Task<IActionResult> Register(RegisterUserAC user)
             {
                 if (ModelState.IsValid)
                 {
-                    //if (!_userRepository.UserExists(user.UserEmail))
-                    //{
+                    if (!this.UserExistsByEmail(user.UserEmail))
+                    {
                         await _userRepository.RegisterUser(user);
                         return Ok(user);
-                    //}
-                    //return BadRequest(new { message = "Email already in use..." });
+                    }
+                    return BadRequest(new { message = "Email already in use..." });
                 }
                 return BadRequest();
             }
-        // GET: api/user
-        [HttpGet]
+        //POST: api/user/login
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginUserAC model)
+        {
+            if (ModelState.IsValid)
+            {
+                var token = await this._userRepository.LoginUser(model);
+                if (token!=null)
+                {
+                    return Ok(token);
+                }
+                return Unauthorized();
+            }
+            return BadRequest();
+        }
+            // GET: api/user
+            [HttpGet]
             public async Task<IEnumerable<UserAC>> GetUsers()
             {
                 return this._userRepository.GetUsers();
@@ -52,11 +63,6 @@ namespace Splitwise.Core.Controller
             [HttpGet("{id}")]
             public async Task<IActionResult> GetUser([FromRoute] string id)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
                 var users = await this._userRepository.GetUser(id);
 
                 if (users == null)
@@ -70,11 +76,7 @@ namespace Splitwise.Core.Controller
             [HttpGet("byEmail/{email}")]
             public async Task<IActionResult> GetUserByEmail([FromRoute] string email)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
+                
                 var users =await this._userRepository.GetUserByEmailAsync(email);
 
                 if (users == null)
@@ -84,5 +86,39 @@ namespace Splitwise.Core.Controller
 
                 return Ok(users);
             }
+        //DELETE: api/user/id
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UserAC>> DeleteEmployee(string id)
+        {
+            if (this.UserExistsById(id))
+            {
+                await this._userRepository.DeleteUser(id);
+                return Ok();
+            }
+            return NotFound();
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEmployee(string id, UserAC user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (this._userRepository.UserExistsById(id))
+                {
+                    user.Id = id;
+                    await this._userRepository.UpdateUser(user);
+                    return Ok(user);
+                }
+                return NotFound();
+            }
+            return BadRequest();
+        }
+        private bool UserExistsById(string id)
+        {
+            return _userRepository.UserExistsById(id);
+        }
+        private bool UserExistsByEmail(string email)
+        {
+            return _userRepository.UserExistsByEmail(email);
+        }
     }
 }

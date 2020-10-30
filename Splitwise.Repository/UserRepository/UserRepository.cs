@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Splitwise.DomainModel;
 using Splitwise.DomainModel.ApplicationClasses;
 using Splitwise.DomainModel.Models;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,8 +34,8 @@ namespace Splitwise.Repository.UserRepository
         public IEnumerable<UserAC> GetUsers() {
             return this._mapper.Map<IEnumerable<UserAC>>(this._userManager.Users);
         }
-        public Task<UserAC> GetUser(string userId) {
-            throw new NotImplementedException();
+        public async Task<UserAC> GetUser(string userId) {
+            return _mapper.Map<UserAC>(await _userManager.Users.Where(u => u.Id == userId).SingleOrDefaultAsync());
         }
         public async Task<UserAC> GetUserByEmailAsync(string userEmail) {
             return _mapper.Map<UserAC>(await _userManager.Users.Where(u => u.Email == userEmail).SingleOrDefaultAsync());
@@ -57,14 +60,63 @@ namespace Splitwise.Repository.UserRepository
             }
             return null;
         }
-        public Task UpdateUser(UserAC user) {
-            throw new NotImplementedException();
+        public async Task<IdentityResult> UpdateUser(UserAC userAC) {
+            var user = await this._userManager.FindByIdAsync(userAC.Id);
+            user.UserFullName = userAC.UserFullName;
+            user.UserName = userAC.UserName;
+            IdentityResult result = await this._userManager.UpdateAsync(user);
+            return result;
         }
-        public Task DeleteUser(UserAC user) {
-            throw new NotImplementedException();
+        public async Task DeleteUser(string userId) {
+            var user = await _userManager.Users.Where(u => u.Id == userId).SingleOrDefaultAsync();
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
         }
-        public bool UserExists(string userEmail) {
-            throw new NotImplementedException();
+        public bool UserExistsById(string userId) {
+            return this._userManager.Users.Any(e => e.Id == userId);
+        }
+        public bool UserExistsByEmail(string userEmail)
+        {
+            return this._userManager.Users.Any(e => e.Email == userEmail);
+        }
+
+        public async Task<TokenAC> LoginUser(LoginUserAC user)
+        {
+            User loginuser = await _userManager.FindByEmailAsync(user.UserEmail);
+            if (loginuser != null && await _userManager.CheckPasswordAsync(loginuser, user.UserPassword))
+            {
+                var userRoles = await _userManager.GetRolesAsync(loginuser);
+
+                var authClaims = new List<Claim>
+                {
+                    new Claim("name", loginuser.UserName),
+                    new Claim(ClaimTypes.Name, loginuser.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                };
+
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim("role", userRole));
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+
+                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+
+                var token = new JwtSecurityToken(
+                    issuer: _configuration["JWT:ValidIssuer"],
+                    audience: _configuration["JWT:ValidAudience"],
+                    expires: DateTime.Now.AddHours(3),
+                    claims: authClaims,
+                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+                    );
+                var tokenObject = new TokenAC();
+                    tokenObject.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                    tokenObject.Expiration = token.ValidTo;
+                return tokenObject;
+            }
+            return null;
         }
     }
 }

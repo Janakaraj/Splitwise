@@ -13,8 +13,10 @@ namespace Splitwise.Repository.UserRepository
         Task<UserAC> GetUser(string userId);
         Task<UserAC> GetUserByEmailAsync(string userEmail);
         Task<IdentityResult> RegisterUser(RegisterUserAC user);
-        Task UpdateUser(UserAC user);
-        Task DeleteUser(UserAC user);
-        bool UserExists(string userEmail);
+        Task<TokenAC> LoginUser(LoginUserAC user);
+        Task<IdentityResult> UpdateUser(UserAC user);
+        Task DeleteUser(string userId);
+        bool UserExistsByEmail(string userEmail);
+        bool UserExistsById(string userId);
     }
 }
