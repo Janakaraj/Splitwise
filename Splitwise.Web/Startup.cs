@@ -17,7 +17,10 @@ using Microsoft.IdentityModel.Tokens;
 using Splitwise.DomainModel;
 using Splitwise.DomainModel.ApplicationClasses;
 using Splitwise.DomainModel.Models;
+using Splitwise.Repository.ExpenseRepository;
 using Splitwise.Repository.GroupRepository;
+using Splitwise.Repository.PayeeRepository;
+using Splitwise.Repository.PayerRepository;
 using Splitwise.Repository.UserRepository;
 
 namespace Splitwise.Web
@@ -36,6 +39,9 @@ namespace Splitwise.Web
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            services.AddScoped<IPayeeRepository, PayeeRepository>();
+            services.AddScoped<IPayerRepository, PayerRepository>();
             services.AddDbContext<SplitwiseDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Mystring"),
@@ -86,6 +92,12 @@ namespace Splitwise.Web
                 config.CreateMap<UserAC, User>();
                 config.CreateMap<GroupAC, Group>();
                 config.CreateMap<Group, GroupAC>();
+                config.CreateMap<PayeeAC, Payee>();
+                config.CreateMap<Payee, PayeeAC>();
+                config.CreateMap<PayerAC, Payer>();
+                config.CreateMap<Payer, PayerAC>();
+                config.CreateMap<ExpenseAC, Expense>();
+                config.CreateMap<Expense, ExpenseAC>();
             });
             IMapper mapper = configuration.CreateMapper();
             services.AddSingleton(mapper);
