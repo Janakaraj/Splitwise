@@ -1,6 +1,12 @@
-﻿using Splitwise.DomainModel.ApplicationClasses;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Splitwise.DomainModel;
+using Splitwise.DomainModel.ApplicationClasses;
+using Splitwise.DomainModel.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,34 +14,51 @@ namespace Splitwise.Repository.GroupRepository
 {
     public class GroupRepository : IGroupRepository
     {
-        public Task CreateGroup(GroupAC group)
+        private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
+        private readonly SplitwiseDbContext _context;
+
+
+        public GroupRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IMapper _mapper)
         {
-            throw new NotImplementedException();
+            this._context = _context;
+            this._userManager = _userManager;
+            this._mapper = _mapper;
+        }
+        public async Task CreateGroup(GroupAC group)
+        {
+            this._context.Groups.Add(this._mapper.Map<Group>(group));
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteGroup(int id)
+        public async Task DeleteGroup(int id)
         {
-            throw new NotImplementedException();
+            var group = await _context.Groups.FindAsync(id);
+            _context.Groups.Remove(group);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<GroupAC> GetGroup(int groupId)
+        public async Task<GroupAC> GetGroup(int groupId)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<GroupAC>(await this._context.Groups.Where(g=>g.GroupId==groupId).SingleOrDefaultAsync());
         }
 
-        public Task<IEnumerable<GroupAC>> GetGroups(string userEmail)
+        public IEnumerable<GroupAC> GetGroups()
         {
-            throw new NotImplementedException();
+            return this._mapper.Map<IEnumerable<GroupAC>>(this._context.Groups);
         }
 
         public bool GroupExists(int groupId)
         {
-            throw new NotImplementedException();
+            return _context.Groups.Any(e => e.GroupId == groupId);
         }
 
-        public Task UpdateGroup(GroupAC group)
+        public async Task UpdateGroup(GroupAC groupAC)
         {
-            throw new NotImplementedException();
+            var groupToUpdate = this._context.Groups.Where(e => e.GroupId == groupAC.GroupId).FirstOrDefault();
+            groupToUpdate.GroupName = groupAC.GroupName;
+            this._context.Groups.Update(groupToUpdate);
+            await _context.SaveChangesAsync();
         }
     }
 }
