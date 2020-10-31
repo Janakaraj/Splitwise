@@ -21,6 +21,7 @@ using Splitwise.Repository.ExpenseRepository;
 using Splitwise.Repository.GroupRepository;
 using Splitwise.Repository.PayeeRepository;
 using Splitwise.Repository.PayerRepository;
+using Splitwise.Repository.SettlementRepository;
 using Splitwise.Repository.UserGroupRepository;
 using Splitwise.Repository.UserRepository;
 
@@ -43,6 +44,7 @@ namespace Splitwise.Web
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
             services.AddScoped<IPayeeRepository, PayeeRepository>();
             services.AddScoped<IPayerRepository, PayerRepository>();
+            services.AddScoped<ISettlementRepository, SettlementRepository>();
             services.AddScoped<IUserGroupRepository, UserGroupRepository>();
             services.AddDbContext<SplitwiseDbContext>(options =>
             {
@@ -102,6 +104,8 @@ namespace Splitwise.Web
                 config.CreateMap<Expense, ExpenseAC>();
                 config.CreateMap<UserGroupAC, UserGroup>();
                 config.CreateMap<UserGroup, UserGroupAC>();
+                config.CreateMap<SettlementAC, Settlement>();
+                config.CreateMap<Settlement, SettlementAC>();
             });
             IMapper mapper = configuration.CreateMapper();
             services.AddSingleton(mapper);
