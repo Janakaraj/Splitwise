@@ -12,6 +12,6 @@ namespace Splitwise.Repository.UserGroupRepository
         Task<IEnumerable<GroupAC>> GetUserGroupsByUserId(string userId);
         Task AddUserToGroup(string userId, int groupId);
         Task RemoveUserFromGroup(string userId, int groupId);
-        bool GroupMemberExists(int id);
+        bool GroupMemberExists(string userId, int groupId);
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Splitwise.DomainModel.ApplicationClasses
 {
-    public class userGroupAC
+    public class UserGroupAC
     {
         public int Id { get; set; }
         public int GroupId { get; set; }
