@@ -14,15 +14,13 @@ namespace Splitwise.Repository.PayeeRepository
 {
     public class PayeeRepository : IPayeeRepository
     {
-        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
 
 
-        public PayeeRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IMapper _mapper)
+        public PayeeRepository(SplitwiseDbContext _context, IMapper _mapper)
         {
             this._context = _context;
-            this._userManager = _userManager;
             this._mapper = _mapper;
         }
         public async Task AddPayee(PayeeAC payee)

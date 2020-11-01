@@ -1,6 +1,11 @@
-﻿using Splitwise.DomainModel.ApplicationClasses;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Splitwise.DomainModel;
+using Splitwise.DomainModel.ApplicationClasses;
+using Splitwise.DomainModel.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,34 +13,54 @@ namespace Splitwise.Repository.PayerRepository
 {
     public class PayerRepository : IPayerRepository
     {
-        public Task AddPayer(PayerAC payer)
+        private readonly IMapper _mapper;
+        private readonly SplitwiseDbContext _context;
+
+        public PayerRepository(SplitwiseDbContext _context, IMapper _mapper)
         {
-            throw new NotImplementedException();
+            this._context = _context;
+            this._mapper = _mapper;
+        }
+        public async Task AddPayer(PayerAC payer)
+        {
+            this._context.Payers.Add(this._mapper.Map<Payer>(payer));
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeletePayer(int payerTableId)
+        public async Task DeletePayer(string payerId)
         {
-            throw new NotImplementedException();
+            var payer = await _context.Payers.FindAsync(payerId);
+            _context.Payers.Remove(payer);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<ExpenseAC>> GetExpensesBypayerId(int payerId)
+        public IEnumerable<ExpenseAC> GetExpensesByPayerId(string payerId)
         {
-            throw new NotImplementedException();
+            return this._mapper.Map<IEnumerable<ExpenseAC>>(this._context.Payers
+                .Where(p => p.PayerId == payerId)
+                .Include(p => p.Expense)
+                .Select(p => p.Expense));
         }
 
-        public Task<IEnumerable<PayerAC>> GetPayersByExpenseId(int expenseId)
+        public IEnumerable<UserAC> GetPayersByExpenseId(int expenseId)
         {
-            throw new NotImplementedException();
+            return this._mapper.Map<IEnumerable<UserAC>>(this._context.Payers
+                .Where(p => p.ExpenseId == expenseId)
+                .Include(p => p.PayerUser)
+                .Select(p => p.PayerUser));
         }
 
-        public bool PayerExists(int payerId)
+        public bool PayerExists(string payerId)
         {
-            throw new NotImplementedException();
+            return _context.Payers.Any(e => e.PayerId == payerId);
         }
 
-        public Task UpdatePayer(PayerAC payer)
+        public async Task UpdatePayer(string payerId, int expenseId, PayerAC payer)
         {
-            throw new NotImplementedException();
+            var payerToUpdate = this._context.Payers.Where(e => (e.PayerId == payerId) && (e.ExpenseId == expenseId)).FirstOrDefault();
+            payerToUpdate.AmountPaid = payer.AmountPaid;
+            this._context.Payers.Update(payerToUpdate);
+            await _context.SaveChangesAsync();
         }
     }
 }
