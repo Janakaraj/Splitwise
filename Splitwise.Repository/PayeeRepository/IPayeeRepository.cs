@@ -8,11 +8,11 @@ namespace Splitwise.Repository.PayeeRepository
 {
     public interface IPayeeRepository
     {
-        Task<IEnumerable<UserAC>> GetPayeesByExpenseId(int expenseId);
-        Task<IEnumerable<ExpenseAC>> GetExpensesByPayeeId(string payeeId);
+        IEnumerable<UserAC> GetPayeesByExpenseId(int expenseId);
+        IEnumerable<ExpenseAC> GetExpensesByPayeeId(string payeeId);
         Task AddPayee(PayeeAC payee);
-        Task UpdatePayee(PayeeAC payee);
-        Task DeletePayee(int payeeId);
-        bool PayeeExists(int id);
+        Task UpdatePayee(string payeeid, int expenseid, PayeeAC payee);
+        Task DeletePayee(string payeeId);
+        bool PayeeExists(string id);
     }
 }
