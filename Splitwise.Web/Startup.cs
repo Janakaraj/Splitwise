@@ -109,6 +109,7 @@ namespace Splitwise.Web
             });
             IMapper mapper = configuration.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -120,6 +121,8 @@ namespace Splitwise.Web
             }
 
             app.UseRouting();
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseEndpoints(endpoints =>
             {

@@ -52,6 +52,11 @@ namespace Splitwise.Repository.SettlementRepository
             return this._mapper.Map<IEnumerable<SettlementAC>>(this._context.Settlements.Where(e => e.SettlementGroupId == groupId));
         }
 
+        public async Task<IEnumerable<SettlementAC>> GetSettlementsByExpenseId(int expenseId)
+        {
+            return this._mapper.Map<IEnumerable<SettlementAC>>(this._context.Settlements.Where(e => e.SettlementExpenseId == expenseId));
+        }
+
         public bool SettlementExists(int settlementId)
         {
             return this._context.Settlements.Any(s => s.SettlementId == settlementId);

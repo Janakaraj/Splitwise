@@ -27,22 +27,22 @@ namespace Splitwise.Core.Controller
         }
 
         // GET: api/usergroup/groupbyuserid/id
-        [HttpGet("groupbyuserid/{id}")]
-        public async Task<IEnumerable<GroupAC>> Getusergroups(string id)
+        [HttpGet("groupbyuserid/{userid}")]
+        public async Task<IEnumerable<GroupAC>> Getusergroups(string userid)
         {
-            if (this.UserExistsById(id))
+            if (this.UserExistsById(userid))
             {
-                return await this._usergroupRepository.GetUserGroupsByUserId(id);
+                return await this._usergroupRepository.GetUserGroupsByUserId(userid);
             }
             return null;
         }
         // GET: api/usergroup/userbygroupid/2
-        [HttpGet("userbygroupid/{id}")]
-        public async Task<IEnumerable<UserAC>> Getuseringroups(int id)
+        [HttpGet("userbygroupid/{groupid}")]
+        public async Task<IEnumerable<UserAC>> Getuseringroups(int groupid)
         {
-            if (this.GroupExists(id))
+            if (this.GroupExists(groupid))
             {
-                return await this._usergroupRepository.GetGroupMembersByGroupId(id);
+                return await this._usergroupRepository.GetGroupMembersByGroupId(groupid);
             }
             return null;
         }

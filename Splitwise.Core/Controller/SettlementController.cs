@@ -51,6 +51,19 @@ namespace Splitwise.Core.Controller
 
             return Ok(settlement);
         }
+        // GET: api/settlement/5
+        [HttpGet("byexpenseid/{expenseid}")]
+        public async Task<IActionResult> GetSettlementsByExpenseId([FromRoute] int expenseid)
+        {
+            var settlement = await this._settlementRepository.GetSettlementsByExpenseId(expenseid);
+
+            if (settlement == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(settlement);
+        }
 
         // PUT: api/SettlementsApi/5
         [HttpPut("{id}")]
