@@ -51,7 +51,7 @@ namespace Splitwise.Core.Controller
 
             return Ok(settlement);
         }
-        // GET: api/settlement/5
+        // GET: api/settlement/byexpenseid/2
         [HttpGet("byexpenseid/{expenseid}")]
         public async Task<IActionResult> GetSettlementsByExpenseId([FromRoute] int expenseid)
         {

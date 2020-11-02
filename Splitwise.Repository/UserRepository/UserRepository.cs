@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Splitwise.DomainModel;
 using Splitwise.DomainModel.ApplicationClasses;
 using Splitwise.DomainModel.Models;
+using Splitwise.Repository.GroupRepository;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -22,14 +23,16 @@ namespace Splitwise.Repository.UserRepository
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
+        private readonly IGroupRepository _groupRepository;
 
 
-        public UserRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IConfiguration _configuration, IMapper _mapper)
+        public UserRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IConfiguration _configuration, IMapper _mapper, IGroupRepository groupRepository)
         {
             this._context = _context;
             this._userManager = _userManager;
             this._configuration = _configuration;
             this._mapper = _mapper;
+            this._groupRepository = groupRepository;
         }
         public IEnumerable<UserAC> GetUsers() {
             return this._mapper.Map<IEnumerable<UserAC>>(this._userManager.Users);
@@ -69,6 +72,11 @@ namespace Splitwise.Repository.UserRepository
         }
         public async Task DeleteUser(string userId) {
             var user = await _userManager.Users.Where(u => u.Id == userId).SingleOrDefaultAsync();
+            var groupIds = _context.Groups.Where(e => e.GroupCreatorId == userId).Select(g=>g.GroupId);
+            foreach(int groupId in groupIds)
+            {
+                await this._groupRepository.DeleteGroup(groupId);
+            }
             if (user != null)
             {
                 await _userManager.DeleteAsync(user);

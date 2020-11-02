@@ -5,6 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201102103922_Change_delete_to_cascade.cs" />
+    <Compile Remove="Migrations\20201102103922_Change_delete_to_cascade.Designer.cs" />
+    <Compile Remove="Migrations\20201102104648_Change_delete_to_cascade.cs" />
+    <Compile Remove="Migrations\20201102104648_Change_delete_to_cascade.Designer.cs" />
+    <Compile Remove="Migrations\20201102111932_test.cs" />
+    <Compile Remove="Migrations\20201102111932_test.Designer.cs" />
+    <Compile Remove="Migrations\20201102112226_test.cs" />
+    <Compile Remove="Migrations\20201102112226_test.Designer.cs" />
+    <Compile Remove="Migrations\20201102132244_test.cs" />
+    <Compile Remove="Migrations\20201102132244_test.Designer.cs" />
+    <Compile Remove="Migrations\20201102132410_test.cs" />
+    <Compile Remove="Migrations\20201102132410_test.Designer.cs" />
+    <Compile Remove="Migrations\20201102132532_Adds_Cascade_delete.cs" />
+    <Compile Remove="Migrations\20201102132532_Adds_Cascade_delete.Designer.cs" />
+    <Compile Remove="Migrations\20201102132945_test.cs" />
+    <Compile Remove="Migrations\20201102132945_test.Designer.cs" />
+    <Compile Remove="Migrations\20201102133148_test.cs" />
+    <Compile Remove="Migrations\20201102133148_test.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">

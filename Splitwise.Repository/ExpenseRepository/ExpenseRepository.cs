@@ -28,9 +28,11 @@ namespace Splitwise.Repository.ExpenseRepository
             await _context.SaveChangesAsync();
         }
 
-        public Task DeleteExpense(int expenseId)
+        public async Task DeleteExpense(int expenseId)
         {
-            throw new NotImplementedException();
+            var expense = await _context.Expenses.FindAsync(expenseId);
+            _context.Expenses.Remove(expense);
+            await _context.SaveChangesAsync();
         }
 
         public Task DeleteExpensesByGroupId(int groupId)
