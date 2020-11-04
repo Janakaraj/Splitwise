@@ -20,7 +20,7 @@ namespace Splitwise.Core.Controller
 
         // GET: api/group
         [HttpGet]
-            public async Task<IEnumerable<GroupAC>> Getgroups()
+            public async Task<IEnumerable<GroupAC>> GetGroups()
             {
             return this._groupRepository.GetGroups();
             }

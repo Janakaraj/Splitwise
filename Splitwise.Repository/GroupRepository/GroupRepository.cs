@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Splitwise.DomainModel;
 using Splitwise.DomainModel.ApplicationClasses;
 using Splitwise.DomainModel.Models;
+using Splitwise.Repository.UserGroupRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +18,24 @@ namespace Splitwise.Repository.GroupRepository
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
+        private readonly IUserGroupRepository _userGroupRepository;
 
 
-        public GroupRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IMapper _mapper)
+        public GroupRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IMapper _mapper, IUserGroupRepository userGroupRepository)
         {
             this._context = _context;
             this._userManager = _userManager;
             this._mapper = _mapper;
+            this._userGroupRepository = userGroupRepository;
         }
         public async Task CreateGroup(GroupAC group)
         {
+            var groupName = group.GroupName;
+            var groupCreatorId = group.GroupCreatorId;
             this._context.Groups.Add(this._mapper.Map<Group>(group));
+            await _context.SaveChangesAsync();
+            var groupId = this.GetGroups().Where(g => g.GroupName == groupName).Select(g => g.GroupId).FirstOrDefault();
+            await this._userGroupRepository.AddUserToGroup(groupCreatorId,groupId);
             await _context.SaveChangesAsync();
         }
 

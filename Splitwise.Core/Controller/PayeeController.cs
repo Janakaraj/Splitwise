@@ -28,7 +28,7 @@ namespace Splitwise.Core.Controller
 
         // GET: api/payee/expensebypayeeid/{payeeId}
         [HttpGet("expensebypayeeid/{payeeId}")]
-        public IEnumerable<ExpenseAC> GetExpenseByPayeeId(string payeeId)
+        public IEnumerable<ExpenseAC> GetExpensesByPayeeId(string payeeId)
         {
             return this._payeeRepository.GetExpensesByPayeeId(payeeId);
         }

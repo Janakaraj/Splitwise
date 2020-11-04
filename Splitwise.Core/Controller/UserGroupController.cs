@@ -28,7 +28,7 @@ namespace Splitwise.Core.Controller
 
         // GET: api/usergroup/groupbyuserid/id
         [HttpGet("groupbyuserid/{userid}")]
-        public async Task<IEnumerable<GroupAC>> Getusergroups(string userid)
+        public async Task<IEnumerable<GroupAC>> GetUserGroups(string userid)
         {
             if (this.UserExistsById(userid))
             {
@@ -38,7 +38,7 @@ namespace Splitwise.Core.Controller
         }
         // GET: api/usergroup/userbygroupid/2
         [HttpGet("userbygroupid/{groupid}")]
-        public async Task<IEnumerable<UserAC>> Getuseringroups(int groupid)
+        public async Task<IEnumerable<UserAC>> GetUsersInGroup(int groupid)
         {
             if (this.GroupExists(groupid))
             {

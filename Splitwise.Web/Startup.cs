@@ -110,6 +110,16 @@ namespace Splitwise.Web
             IMapper mapper = configuration.CreateMapper();
             services.AddSingleton(mapper);
             services.AddSwaggerDocument();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyHeader();
+                                      builder.AllowAnyMethod();
+                                      builder.AllowAnyOrigin();
+                                  });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,6 +133,7 @@ namespace Splitwise.Web
             app.UseRouting();
             app.UseOpenApi();
             app.UseSwaggerUi3();
+            app.UseCors("AllowAll");
 
             app.UseEndpoints(endpoints =>
             {

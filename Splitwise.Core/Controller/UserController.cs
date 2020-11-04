@@ -88,7 +88,7 @@ namespace Splitwise.Core.Controller
             }
         //DELETE: api/user/id
         [HttpDelete("{id}")]
-        public async Task<ActionResult<UserAC>> DeleteEmployee(string id)
+        public async Task<ActionResult<UserAC>> DeleteUser(string id)
         {
             if (this.UserExistsById(id))
             {
@@ -98,7 +98,7 @@ namespace Splitwise.Core.Controller
             return NotFound();
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(string id, UserAC user)
+        public async Task<IActionResult> PutUser(string id, UserAC user)
         {
             if (ModelState.IsValid)
             {
