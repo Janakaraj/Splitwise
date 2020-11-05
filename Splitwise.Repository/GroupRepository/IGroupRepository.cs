@@ -8,7 +8,7 @@ namespace Splitwise.Repository.GroupRepository
 {
     public interface IGroupRepository
     {
-        IEnumerable<GroupAC> GetGroups();
+        Task<IEnumerable<GroupAC>> GetGroups();
         Task<GroupAC> GetGroup(int groupId);
         Task CreateGroup(GroupAC group);
         Task UpdateGroup(GroupAC group);

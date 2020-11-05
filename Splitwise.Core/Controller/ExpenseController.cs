@@ -21,9 +21,9 @@ namespace Splitwise.Core.Controller
 
         // GET: api/expense
         [HttpGet("getexpensesbygroupid/{groupId}")]
-        public async Task<IEnumerable<ExpenseAC>> GetexpensesByGroupId([FromRoute] int groupId)
+        public async Task<ActionResult<IEnumerable<ExpenseAC>>> GetexpensesByGroupId([FromRoute] int groupId)
         {
-            return this._expenseRepository.GetExpensesByGroupId(groupId);
+            return Ok(await this._expenseRepository.GetExpensesByGroupId(groupId));
         }
         // GET: api/expense/5
         [HttpGet("{id}")]

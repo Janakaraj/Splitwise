@@ -57,7 +57,7 @@ namespace Splitwise.Core.Controller
             [HttpGet]
             public async Task<IEnumerable<UserAC>> GetUsers()
             {
-                return this._userRepository.GetUsers();
+                return await this._userRepository.GetUsers();
             }
             // GET: api/user/5
             [HttpGet("{id}")]

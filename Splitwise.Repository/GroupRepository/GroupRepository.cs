@@ -34,7 +34,7 @@ namespace Splitwise.Repository.GroupRepository
             var groupCreatorId = group.GroupCreatorId;
             this._context.Groups.Add(this._mapper.Map<Group>(group));
             await _context.SaveChangesAsync();
-            var groupId = this.GetGroups().Where(g => g.GroupName == groupName).Select(g => g.GroupId).FirstOrDefault();
+            var groupId = this._context.Groups.Where(g => g.GroupName == groupName).Select(g => g.GroupId).FirstOrDefault();
             await this._userGroupRepository.AddUserToGroup(groupCreatorId,groupId);
             await _context.SaveChangesAsync();
         }
@@ -51,9 +51,9 @@ namespace Splitwise.Repository.GroupRepository
             return _mapper.Map<GroupAC>(await this._context.Groups.Where(g=>g.GroupId==groupId).SingleOrDefaultAsync());
         }
 
-        public IEnumerable<GroupAC> GetGroups()
+        public async Task<IEnumerable<GroupAC>> GetGroups()
         {
-            return this._mapper.Map<IEnumerable<GroupAC>>(this._context.Groups);
+            return this._mapper.Map<IEnumerable<GroupAC>>( await this._context.Groups.Include(e=>e.GroupCreator).Select(e=>e).ToListAsync());
         }
 
         public bool GroupExists(int groupId)

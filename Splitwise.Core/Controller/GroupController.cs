@@ -3,6 +3,7 @@ using Splitwise.DomainModel.ApplicationClasses;
 using Splitwise.Repository.GroupRepository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Splitwise.Core.Controller
@@ -20,13 +21,14 @@ namespace Splitwise.Core.Controller
 
         // GET: api/group
         [HttpGet]
-            public async Task<IEnumerable<GroupAC>> GetGroups()
+        [Route("/Groups")]
+            public async Task<ActionResult<GroupAC>> GetGroups()
             {
-            return this._groupRepository.GetGroups();
+            return Ok(await this._groupRepository.GetGroups());
             }
         // GET: api/group/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetGroup([FromRoute] int id)
+        public async Task<ActionResult<GroupAC>> GetGroup([FromRoute] int id)
         {
             var group = await this._groupRepository.GetGroup(id);
 
@@ -40,7 +42,7 @@ namespace Splitwise.Core.Controller
 
         // PUT: api/GroupsApi/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGroup(int id, GroupAC group)
+        public async Task<ActionResult<GroupAC>> PutGroup(int id, GroupAC group)
         {
             try
             {

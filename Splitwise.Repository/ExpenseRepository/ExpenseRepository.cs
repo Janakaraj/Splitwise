@@ -53,11 +53,13 @@ namespace Splitwise.Repository.ExpenseRepository
                 .SingleOrDefaultAsync());
         }
 
-        public IEnumerable<ExpenseAC> GetExpensesByGroupId(int groupId)
+        public async Task<IEnumerable<ExpenseAC>> GetExpensesByGroupId(int groupId)
         {
-            return this._mapper.Map<IEnumerable<ExpenseAC>>(this._context.Expenses.Where(e=>e.ExpenseGroupId == groupId)
-                .Include(g=>g.ExpenseGroup)
-                .Include(u => u.ExpenseAdder));
+            var expenses = await this._context.Expenses.Where(e => e.ExpenseGroupId == groupId)
+                .Include(g => g.ExpenseGroup)
+                .Include(u => u.ExpenseAdder)
+                .ToListAsync();
+            return this._mapper.Map<IEnumerable<ExpenseAC>>(expenses);
         }
 
         public async Task UpdateExpense(ExpenseAC expense)

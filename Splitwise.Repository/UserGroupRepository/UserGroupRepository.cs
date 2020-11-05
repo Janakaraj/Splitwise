@@ -39,20 +39,21 @@ namespace Splitwise.Repository.UserGroupRepository
 
         public async Task<IEnumerable<UserAC>> GetGroupMembersByGroupId(int groupId)
         {
-            return _mapper.Map<IEnumerable<UserAC>>(
-                this._context.UserGroups
+            var users = await this._context.UserGroups
                 .Where(ug => ug.GroupId == groupId)
                 .Include(u => u.User)
-                .Select(u => u.User));
+                .Select(u => u.User).ToListAsync();
+            return _mapper.Map<IEnumerable<UserAC>>(users);
         }
 
         public async Task<IEnumerable<GroupAC>> GetUserGroupsByUserId(string userId)
         {
-            return _mapper.Map<IEnumerable<GroupAC>>(
-                this._context.UserGroups
-                .Where(ug=>ug.UserId == userId)
-                .Include(g=>g.Group)
-                .Select(g=>g.Group));
+            var groups = await this._context.UserGroups
+                .Where(ug => ug.UserId == userId)
+                .Include(g => g.Group)
+                .Select(g => g.Group).ToListAsync();
+            return _mapper.Map<IEnumerable<GroupAC>>(groups);
+               
         }
 
         public bool GroupMemberExists(string userId, int groupId)

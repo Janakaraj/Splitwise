@@ -23,7 +23,7 @@ namespace Splitwise.Core.Controller
         [HttpGet]
         public async Task<IEnumerable<SettlementAC>> Getsettlements()
         {
-            return this._settlementRepository.GetSettlements();
+            return await this._settlementRepository.GetSettlements();
         }
         // GET: api/settlement/5
         [HttpGet("{id}")]

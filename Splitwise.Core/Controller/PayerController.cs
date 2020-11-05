@@ -21,16 +21,16 @@ namespace Splitwise.Core.Controller
 
         // GET: api/payer/payerbyexpenseid/2
         [HttpGet("payerbyexpenseid/{expenseId}")]
-        public IEnumerable<UserAC> GetPayersByExpenseId(int expenseId)
+        public async Task<ActionResult<IEnumerable<UserAC>>> GetPayersByExpenseId(int expenseId)
         {
-            return this._payerRepository.GetPayersByExpenseId(expenseId);
+            return Ok(await this._payerRepository.GetPayersByExpenseId(expenseId));
         }
 
         // GET: api/payer/expensebypayerid/{payerId}
         [HttpGet("expensebypayerid/{payerId}")]
-        public IEnumerable<ExpenseAC> GetExpensesByPayerId(string payerId)
+        public async Task<ActionResult<IEnumerable<ExpenseAC>>> GetExpensesByPayerId(string payerId)
         {
-            return this._payerRepository.GetExpensesByPayerId(payerId);
+            return Ok(await this._payerRepository.GetExpensesByPayerId(payerId));
         }
 
         // PUT: api/PayersApi/5

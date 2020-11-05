@@ -34,8 +34,9 @@ namespace Splitwise.Repository.UserRepository
             this._mapper = _mapper;
             this._groupRepository = groupRepository;
         }
-        public IEnumerable<UserAC> GetUsers() {
-            return this._mapper.Map<IEnumerable<UserAC>>(this._userManager.Users);
+        public async Task<IEnumerable<UserAC>> GetUsers() {
+            var users = await this._userManager.Users.ToListAsync();
+            return this._mapper.Map<IEnumerable<UserAC>>(users);
         }
         public async Task<UserAC> GetUser(string userId) {
             return _mapper.Map<UserAC>(await _userManager.Users.Where(u => u.Id == userId).SingleOrDefaultAsync());

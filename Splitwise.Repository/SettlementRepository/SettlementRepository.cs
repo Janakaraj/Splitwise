@@ -42,19 +42,19 @@ namespace Splitwise.Repository.SettlementRepository
             return this._mapper.Map<SettlementAC>(await this._context.Settlements.Where(e=>e.SettlementId == settlementId).SingleOrDefaultAsync());
         }
 
-        public IEnumerable<SettlementAC> GetSettlements()
+        public async Task<IEnumerable<SettlementAC>> GetSettlements()
         {
-            return this._mapper.Map<IEnumerable<SettlementAC>>(this._context.Settlements);
+            return this._mapper.Map<IEnumerable<SettlementAC>>(await this._context.Settlements.Select(e=>e).ToListAsync());
         }
 
         public async Task<IEnumerable<SettlementAC>> GetSettlementsByGroupId(int groupId)
         {
-            return this._mapper.Map<IEnumerable<SettlementAC>>(this._context.Settlements.Where(e => e.SettlementGroupId == groupId));
+            return this._mapper.Map<IEnumerable<SettlementAC>>(await this._context.Settlements.Where(e => e.SettlementGroupId == groupId).ToListAsync());
         }
 
         public async Task<IEnumerable<SettlementAC>> GetSettlementsByExpenseId(int expenseId)
         {
-            return this._mapper.Map<IEnumerable<SettlementAC>>(this._context.Settlements.Where(e => e.SettlementExpenseId == expenseId));
+            return this._mapper.Map<IEnumerable<SettlementAC>>(await this._context.Settlements.Where(e => e.SettlementExpenseId == expenseId).ToListAsync());
         }
 
         public bool SettlementExists(int settlementId)

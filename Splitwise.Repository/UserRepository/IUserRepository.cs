@@ -9,7 +9,7 @@ namespace Splitwise.Repository.UserRepository
 {
     public interface IUserRepository
     {
-        IEnumerable<UserAC> GetUsers();
+        Task<IEnumerable<UserAC>> GetUsers();
         Task<UserAC> GetUser(string userId);
         Task<UserAC> GetUserByEmailAsync(string userEmail);
         Task<IdentityResult> RegisterUser(RegisterUserAC user);

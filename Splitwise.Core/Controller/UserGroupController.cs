@@ -27,28 +27,28 @@ namespace Splitwise.Core.Controller
         }
 
         // GET: api/usergroup/groupbyuserid/id
-        [HttpGet("groupbyuserid/{userid}")]
-        public async Task<IEnumerable<GroupAC>> GetUserGroups(string userid)
+        [HttpGet("groupByUserId/{userid}")]
+        public async Task<ActionResult<IEnumerable<GroupAC>>> GetUserGroups(string userid)
         {
             if (this.UserExistsById(userid))
             {
-                return await this._usergroupRepository.GetUserGroupsByUserId(userid);
+                return Ok(await this._usergroupRepository.GetUserGroupsByUserId(userid));
             }
-            return null;
+            return NotFound();
         }
         // GET: api/usergroup/userbygroupid/2
-        [HttpGet("userbygroupid/{groupid}")]
-        public async Task<IEnumerable<UserAC>> GetUsersInGroup(int groupid)
+        [HttpGet("userByGroupId/{groupid}")]
+        public async Task<ActionResult<IEnumerable<UserAC>>> GetUsersInGroup(int groupid)
         {
             if (this.GroupExists(groupid))
             {
-                return await this._usergroupRepository.GetGroupMembersByGroupId(groupid);
+                return Ok(await this._usergroupRepository.GetGroupMembersByGroupId(groupid));
             }
-            return null;
+            return NotFound();
         }
         //POST: api/usergroup
         [HttpPost]
-        [Route("addusertogroup")]
+        [Route("addUserToGroup")]
         public async Task<ActionResult> PostUserGroup(UserGroupMapping ugmapping)
         {
             if (ModelState.IsValid)
@@ -72,7 +72,7 @@ namespace Splitwise.Core.Controller
         }
         // POST: api/usergroup
         [HttpPost]
-        [Route("removeuserfromgroup")]
+        [Route("removeUserFromGroup")]
         public async Task<ActionResult<GroupAC>> DeleteUserGroup(UserGroupMapping ugmapping)
         {
             if (ModelState.IsValid)
