@@ -9,7 +9,7 @@ namespace Splitwise.Repository.FriendRepository
 {
     public interface IFriendRepository
     {
-        IEnumerable<UserAC> GetFriends(string userId);
+        Task<IEnumerable<UserAC>> GetFriends(string userId);
         Task<UserAC> AddFriend(string userId, string userFriendEmail);
         Task<FriendAC> RemoveFriend(string userId, string userFriendId);
         bool FriendExistsByEmail(string userId, string userFriendEmail);

@@ -22,10 +22,11 @@ namespace Splitwise.Repository.ExpenseRepository
             this._context = _context;
             this._mapper = _mapper;
         }
-        public async Task AddExpense(ExpenseAC expense)
+        public async Task<ExpenseAC> AddExpense(ExpenseAC expense)
         {
             this._context.Expenses.Add(this._mapper.Map<Expense>(expense));
             await _context.SaveChangesAsync();
+            return expense;
         }
 
         public async Task DeleteExpense(int expenseId)

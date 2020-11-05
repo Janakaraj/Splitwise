@@ -55,6 +55,7 @@ namespace Splitwise.Core.Controller
         }
             // GET: api/user
             [HttpGet]
+            [Route("/api/Users")]
             public async Task<IEnumerable<UserAC>> GetUsers()
             {
                 return await this._userRepository.GetUsers();

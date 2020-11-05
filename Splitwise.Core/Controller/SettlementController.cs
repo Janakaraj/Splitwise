@@ -21,13 +21,14 @@ namespace Splitwise.Core.Controller
 
         // GET: api/settlement
         [HttpGet]
-        public async Task<IEnumerable<SettlementAC>> Getsettlements()
+        [Route("/api/Settlements")]
+        public async Task<ActionResult<IEnumerable<SettlementAC>>> Getsettlements()
         {
-            return await this._settlementRepository.GetSettlements();
+            return Ok(await this._settlementRepository.GetSettlements());
         }
         // GET: api/settlement/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSettlement([FromRoute] int id)
+        public async Task<ActionResult<SettlementAC>> GetSettlement([FromRoute] int id)
         {
             var settlement = await this._settlementRepository.GetSettlement(id);
 
@@ -39,7 +40,7 @@ namespace Splitwise.Core.Controller
             return Ok(settlement);
         }
         // GET: api/settlement/5
-        [HttpGet("bygroupid/{groupid}")]
+        [HttpGet("byGroupId/{groupid}")]
         public async Task<IActionResult> GetSettlementsByGroupId([FromRoute] int groupid)
         {
             var settlement = await this._settlementRepository.GetSettlementsByGroupId(groupid);
@@ -52,7 +53,7 @@ namespace Splitwise.Core.Controller
             return Ok(settlement);
         }
         // GET: api/settlement/byexpenseid/2
-        [HttpGet("byexpenseid/{expenseid}")]
+        [HttpGet("byExpenseId/{expenseid}")]
         public async Task<IActionResult> GetSettlementsByExpenseId([FromRoute] int expenseid)
         {
             var settlement = await this._settlementRepository.GetSettlementsByExpenseId(expenseid);

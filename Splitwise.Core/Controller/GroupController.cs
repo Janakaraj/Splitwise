@@ -21,7 +21,7 @@ namespace Splitwise.Core.Controller
 
         // GET: api/group
         [HttpGet]
-        [Route("/Groups")]
+        [Route("/api/Groups")]
             public async Task<ActionResult<GroupAC>> GetGroups()
             {
             return Ok(await this._groupRepository.GetGroups());

@@ -20,7 +20,7 @@ namespace Splitwise.Core.Controller
         }
 
         // GET: api/expense
-        [HttpGet("getexpensesbygroupid/{groupId}")]
+        [HttpGet("getExpensesByGroupId/{groupId}")]
         public async Task<ActionResult<IEnumerable<ExpenseAC>>> GetexpensesByGroupId([FromRoute] int groupId)
         {
             return Ok(await this._expenseRepository.GetExpensesByGroupId(groupId));
@@ -70,8 +70,8 @@ namespace Splitwise.Core.Controller
         {
             if (ModelState.IsValid)
             {
-                await this._expenseRepository.AddExpense(expense);
-                return Ok(expense);
+                var result = await this._expenseRepository.AddExpense(expense);
+                return Ok(result);
             }
             return BadRequest();
         }

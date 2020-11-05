@@ -24,9 +24,9 @@ namespace Splitwise.Core.Controller
 
         // GET: api/payee/payeebyexpenseid/2
         [HttpGet("{userId}")]
-        public IEnumerable<UserAC> GetFriends([FromRoute] string userId)
+        public async Task<ActionResult<IEnumerable<UserAC>>> GetFriends([FromRoute] string userId)
         {
-            return this._friendRepository.GetFriends(userId);
+            return Ok(await this._friendRepository.GetFriends(userId));
         }
 
         // POST: api/payee

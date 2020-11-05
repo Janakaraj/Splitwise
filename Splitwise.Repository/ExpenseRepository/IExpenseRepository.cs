@@ -10,7 +10,7 @@ namespace Splitwise.Repository.ExpenseRepository
     {
         Task<IEnumerable<ExpenseAC>> GetExpensesByGroupId(int groupId);
         Task<ExpenseAC> GetExpense(int expenseId);
-        Task AddExpense(ExpenseAC expense);
+        Task<ExpenseAC> AddExpense(ExpenseAC expense);
         Task UpdateExpense(ExpenseAC expense);
         Task DeleteExpense(int expenseId);
         Task DeleteExpensesByGroupId(int groupId);

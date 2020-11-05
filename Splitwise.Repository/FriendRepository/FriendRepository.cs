@@ -45,12 +45,13 @@ namespace Splitwise.Repository.FriendRepository
             return _context.Friends.Any(e => (e.UserId == userId) && (e.UserFriendId == userFriendId));
         }
 
-        public IEnumerable<UserAC> GetFriends(string userId)
+        public async Task<IEnumerable<UserAC>> GetFriends(string userId)
         {
-            return this._mapper.Map<IEnumerable<UserAC>>(this._context.Friends
+            var users = await this._context.Friends
                 .Where(p => p.UserId == userId)
                 .Include(p => p.UserFriend)
-                .Select(p => p.UserFriend));
+                .Select(p => p.UserFriend).ToListAsync();
+            return this._mapper.Map<IEnumerable<UserAC>>(users);
         }
 
         public async Task<FriendAC> RemoveFriend(string userId, string userFriendId)
