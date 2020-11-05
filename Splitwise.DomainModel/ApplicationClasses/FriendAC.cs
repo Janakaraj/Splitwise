@@ -12,4 +12,14 @@ namespace Splitwise.DomainModel.ApplicationClasses
         public string UserFriendId { get; set; }
         public UserAC UserFriend { get; set; }
     }
+    public class AddFriendAC
+    {
+        public string UserId { get; set; }
+        public string UserFriendEmail { get; set; }
+    }
+    public class RemoveFriendAC
+    {
+        public string UserId { get; set; }
+        public string UserFriendId { get; set; }
+    }
 }
