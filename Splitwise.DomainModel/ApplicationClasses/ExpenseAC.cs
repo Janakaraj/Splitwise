@@ -14,6 +14,7 @@ namespace Splitwise.DomainModel.ApplicationClasses
         public string ExpenseSplitBy { get; set; }
         public string ExpenseDescription { get; set; }
         public string ExpenseCurrency { get; set; }
+        public string ExpenseAddTimeStamp { get; set; }
         public string ExpenseAdderId { get; set; }
         public UserAC ExpenseAdder { get; set; }
     }
