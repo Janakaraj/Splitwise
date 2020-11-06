@@ -27,7 +27,7 @@ namespace Splitwise.Core.Controller
         }
         // GET: api/expense/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetExpense([FromRoute] int id)
+        public async Task<ActionResult<ExpenseAC>> GetExpense([FromRoute] int id)
         {
             var expense = await this._expenseRepository.GetExpense(id);
 
@@ -41,7 +41,7 @@ namespace Splitwise.Core.Controller
 
         // PUT: api/ExpensesApi/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutExpense(int id, ExpenseAC expense)
+        public async Task<ActionResult<ExpenseAC>> PutExpense(int id, ExpenseAC expense)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace Splitwise.Core.Controller
 
         // DELETE: api/Expense/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ExpenseAC>> DeleteExpense(int id)
+        public async Task<ActionResult<int>> DeleteExpense(int id)
         {
             //var Expense = await _context.depatments.FindAsync(id);
             if (this.ExpenseExists(id))

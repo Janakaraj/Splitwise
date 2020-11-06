@@ -8,7 +8,7 @@ namespace Splitwise.Repository.PayeeRepository
 {
     public interface IPayeeRepository
     {
-        Task<IEnumerable<UserAC>> GetPayeesByExpenseId(int expenseId);
+        Task<IEnumerable<PayeeAC>> GetPayeesByExpenseId(int expenseId);
         Task<IEnumerable<ExpenseAC>> GetExpensesByPayeeId(string payeeId);
         Task AddPayee(PayeeAC payee);
         Task UpdatePayee(string payeeid, int expenseid, PayeeAC payee);

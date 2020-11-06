@@ -8,7 +8,7 @@ namespace Splitwise.Repository.PayerRepository
 {
     public interface IPayerRepository
     {
-        Task<IEnumerable<UserAC>> GetPayersByExpenseId(int expenseId);
+        Task<IEnumerable<PayerAC>> GetPayersByExpenseId(int expenseId);
         Task<IEnumerable<ExpenseAC>> GetExpensesByPayerId(string payerId);
         Task AddPayer(PayerAC payer);
         Task UpdatePayer(string payerId, int expenseId, PayerAC payer);
