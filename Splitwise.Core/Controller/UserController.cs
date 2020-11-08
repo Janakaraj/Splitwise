@@ -40,7 +40,7 @@ namespace Splitwise.Core.Controller
         //POST: api/user/login
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(LoginUserAC model)
+        public async Task<ActionResult<TokenAC>> Login(LoginUserAC model)
         {
             if (ModelState.IsValid)
             {
