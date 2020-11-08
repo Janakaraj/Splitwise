@@ -101,6 +101,8 @@ namespace Splitwise.Repository.UserRepository
                 var authClaims = new List<Claim>
                 {
                     new Claim("name", loginuser.UserName),
+                    new Claim("userid", loginuser.Id),
+                    new Claim("userFullname", loginuser.UserFullName),
                     new Claim(ClaimTypes.Name, loginuser.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
