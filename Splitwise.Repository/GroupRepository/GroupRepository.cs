@@ -28,15 +28,17 @@ namespace Splitwise.Repository.GroupRepository
             this._mapper = _mapper;
             this._userGroupRepository = userGroupRepository;
         }
-        public async Task CreateGroup(GroupAC group)
+        public async Task<GroupAC> CreateGroup(GroupAC group)
         {
             var groupName = group.GroupName;
             var groupCreatorId = group.GroupCreatorId;
             this._context.Groups.Add(this._mapper.Map<Group>(group));
             await _context.SaveChangesAsync();
-            var groupId = this._context.Groups.Where(g => g.GroupName == groupName).Select(g => g.GroupId).FirstOrDefault();
+            var newGroup = this._context.Groups.Where(g => g.GroupName == groupName).Select(g => g).FirstOrDefault();
+            var groupId = newGroup.GroupId;
             await this._userGroupRepository.AddUserToGroup(groupCreatorId,groupId);
             await _context.SaveChangesAsync();
+            return this._mapper.Map<GroupAC>(newGroup);
         }
 
         public async Task DeleteGroup(int id)

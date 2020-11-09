@@ -23,8 +23,9 @@ namespace Splitwise.Repository.PayerRepository
         }
         public async Task AddPayer(PayerAC payer)
         {
-            this._context.Payers.Add(this._mapper.Map<Payer>(payer));
+            var result = this._context.Payers.Add(this._mapper.Map<Payer>(payer));
             await _context.SaveChangesAsync();
+
         }
 
         public async Task DeletePayer(string payerId)

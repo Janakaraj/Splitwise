@@ -10,7 +10,7 @@ namespace Splitwise.Repository.GroupRepository
     {
         Task<IEnumerable<GroupAC>> GetGroups();
         Task<GroupAC> GetGroup(int groupId);
-        Task CreateGroup(GroupAC group);
+        Task<GroupAC> CreateGroup(GroupAC group);
         Task UpdateGroup(GroupAC group);
         Task DeleteGroup(int id);
         bool GroupExists(int groupId);

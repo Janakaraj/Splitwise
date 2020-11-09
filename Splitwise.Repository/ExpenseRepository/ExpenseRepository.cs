@@ -26,7 +26,10 @@ namespace Splitwise.Repository.ExpenseRepository
         {
             this._context.Expenses.Add(this._mapper.Map<Expense>(expense));
             await _context.SaveChangesAsync();
-            return expense;
+            var expenseName = expense.ExpenseName;
+            var expenseGroupId = expense.ExpenseGroupId;
+            var newExpense = this._context.Expenses.Where(e => (e.ExpenseName == expenseName)&&(e.ExpenseGroupId == expenseGroupId)).Select(e=>e).FirstOrDefault();
+            return this._mapper.Map<ExpenseAC>(newExpense);
         }
 
         public async Task DeleteExpense(int expenseId)

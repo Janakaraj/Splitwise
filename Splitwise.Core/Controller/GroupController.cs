@@ -71,8 +71,8 @@ namespace Splitwise.Core.Controller
         {
             if (ModelState.IsValid)
             {
-                await this._groupRepository.CreateGroup(group);
-                return Ok(group);
+                var addedGroup = await this._groupRepository.CreateGroup(group);
+                return Ok(addedGroup);
             }
             return BadRequest();
         }
