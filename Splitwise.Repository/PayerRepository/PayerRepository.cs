@@ -35,14 +35,15 @@ namespace Splitwise.Repository.PayerRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ExpenseAC>> GetExpensesByPayerId(string payerId)
+        public async Task<IEnumerable<PayerAC>> GetExpensesByPayerId(string payerId)
         {
             var expenses = await this._context.Payers
                 .Where(p => p.PayerId == payerId)
                 .Include(p => p.Expense)
-                .Select(p => p.Expense)
+                .Include(p=>p.PayerUser)
+                .Select(p => p)
                 .ToListAsync();
-            return this._mapper.Map<IEnumerable<ExpenseAC>>(expenses);
+            return this._mapper.Map<IEnumerable<PayerAC>>(expenses);
         }
 
         public async Task<IEnumerable<PayerAC>> GetPayersByExpenseId(int expenseId)

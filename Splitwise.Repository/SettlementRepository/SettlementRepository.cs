@@ -49,7 +49,13 @@ namespace Splitwise.Repository.SettlementRepository
 
         public async Task<IEnumerable<SettlementAC>> GetSettlementsByGroupId(int groupId)
         {
-            return this._mapper.Map<IEnumerable<SettlementAC>>(await this._context.Settlements.Where(e => e.SettlementGroupId == groupId).ToListAsync());
+            return this._mapper.Map<IEnumerable<SettlementAC>>(await this._context.Settlements
+                .Where(e => e.SettlementGroupId == groupId)
+                .Include(e=>e.SettlementExpense)
+                .Include(e=>e.Group)
+                .Include(e=>e.UserPaying)
+                .Include(e=>e.UserRecieving)
+                .ToListAsync());
         }
 
         public async Task<IEnumerable<SettlementAC>> GetSettlementsByExpenseId(int expenseId)
