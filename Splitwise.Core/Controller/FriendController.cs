@@ -55,7 +55,7 @@ namespace Splitwise.Core.Controller
             {
                 if (this._userRepository.UserExistsById(friend.UserFriendId))
                 {
-                    if (this.FriendExistsByEmail(friend.UserId, friend.UserFriendId))
+                    if (this.FriendExistsById(friend.UserId, friend.UserFriendId))
                     {
                         var removedFriend = await this._friendRepository.RemoveFriend(friend.UserId, friend.UserFriendId);
                         return Ok(removedFriend);

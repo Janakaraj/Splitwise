@@ -39,7 +39,7 @@ namespace Splitwise.Repository.PayerRepository
         {
             var expenses = await this._context.Payers
                 .Where(p => p.PayerId == payerId)
-                .Include(p => p.Expense)
+                .Include(p => p.Expense)    
                 .Include(p=>p.PayerUser)
                 .Select(p => p)
                 .ToListAsync();
