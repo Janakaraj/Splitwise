@@ -28,7 +28,7 @@ namespace Splitwise.Core.Controller
 
         // GET: api/payee/expensebypayeeid/{payeeId}
         [HttpGet("expenseByPayeeId/{payeeId}")]
-        public async Task<ActionResult<IEnumerable<ExpenseAC>>> GetExpensesByPayeeId(string payeeId)
+        public async Task<ActionResult<IEnumerable<PayeeAC>>> GetExpensesByPayeeId(string payeeId)
         {
             return Ok(await this._payeeRepository.GetExpensesByPayeeId(payeeId));
         }
