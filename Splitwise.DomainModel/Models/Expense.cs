@@ -10,7 +10,7 @@ namespace Splitwise.DomainModel.Models
         public int ExpenseId { get; set; }
         public string  ExpenseName { get; set; }
         public double ExpenseTotalAmount { get; set; }
-        public int ExpenseGroupId { get; set; }
+        public int? ExpenseGroupId { get; set; }
         [ForeignKey("ExpenseGroupId")]
         public Group ExpenseGroup { get; set; }
         public string ExpenseSplitBy { get; set; }

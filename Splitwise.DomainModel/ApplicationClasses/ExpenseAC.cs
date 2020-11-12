@@ -9,7 +9,7 @@ namespace Splitwise.DomainModel.ApplicationClasses
         public int ExpenseId { get; set; }
         public string ExpenseName { get; set; }
         public double ExpenseTotalAmount { get; set; }
-        public int ExpenseGroupId { get; set; }
+        public int? ExpenseGroupId { get; set; }
         public GroupAC ExpenseGroup { get; set; }
         public string ExpenseSplitBy { get; set; }
         public string ExpenseDescription { get; set; }
