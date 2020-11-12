@@ -65,6 +65,7 @@ namespace Splitwise.Repository.PayerRepository
         {
             var payerToUpdate = this._context.Payers.Where(e => (e.PayerId == payerId) && (e.ExpenseId == expenseId)).FirstOrDefault();
             payerToUpdate.AmountPaid = payer.AmountPaid;
+            payerToUpdate.PayerShare = payer.PayerShare;
             this._context.Payers.Update(payerToUpdate);
             await _context.SaveChangesAsync();
         }

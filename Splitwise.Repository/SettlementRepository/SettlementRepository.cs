@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Splitwise.DomainModel;
 using Splitwise.DomainModel.ApplicationClasses;
 using Splitwise.DomainModel.Models;
+using Splitwise.Repository.PayeeRepository;
+using Splitwise.Repository.PayerRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +20,29 @@ namespace Splitwise.Repository.SettlementRepository
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
-        public SettlementRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IMapper _mapper)
+        private readonly IPayerRepository _payerRepository;
+        private readonly IPayeeRepository _payeeRepository;
+        public SettlementRepository(SplitwiseDbContext context, UserManager<User> userManager, IMapper mapper, IPayerRepository payerRepository, IPayeeRepository payeeRepository)
         {
-            this._context = _context;
-            this._userManager = _userManager;
-            this._mapper = _mapper;
+            this._context = context;
+            this._userManager = userManager;
+            this._mapper = mapper;
+            this._payerRepository = payerRepository;
+            this._payeeRepository = payeeRepository;
         }
         public async Task AddSettlement(SettlementAC settlement)
         {
             this._context.Settlements.Add(this._mapper.Map<Settlement>(settlement));
+            var payerToUpdate = this._context.Payers.Where(e => (e.ExpenseId == settlement.SettlementExpenseId) && (e.PayerId == settlement.UserRecievingId))
+                .FirstOrDefault();
+            payerToUpdate.PayerShare = payerToUpdate.PayerShare + settlement.TransactionAmount;
+            var payerToUpdateAC = _mapper.Map<PayerAC>(payerToUpdate);
+            await this._payerRepository.UpdatePayer(settlement.UserRecievingId, settlement.SettlementExpenseId, payerToUpdateAC);
+            var payeeToUpdate = this._context.Payees.Where(e => (e.ExpenseId == settlement.SettlementExpenseId) && (e.PayeeId == settlement.UserPayingId))
+                .FirstOrDefault();
+            payeeToUpdate.PayeeShare = payeeToUpdate.PayeeShare - settlement.TransactionAmount;
+            var payeeToUpdateAC = _mapper.Map<PayeeAC>(payeeToUpdate);
+            await this._payeeRepository.UpdatePayee(settlement.UserPayingId, settlement.SettlementExpenseId, payeeToUpdateAC);
             await _context.SaveChangesAsync();
         }
 
