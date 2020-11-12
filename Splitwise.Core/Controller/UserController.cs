@@ -13,16 +13,32 @@ namespace Splitwise.Core.Controller
         [ApiController]
         public class UserController : ControllerBase
         {
+        #region Private Variables
             private readonly UserManager<User> _userManager;
             private readonly IUserRepository _userRepository;
+        #endregion
 
-            public UserController(UserManager<User> userManager, IUserRepository userRepository)
+        #region Constructors
+
+        public UserController(UserManager<User> userManager, IUserRepository userRepository)
             {
                this._userManager = userManager;
                this._userRepository = userRepository;
             }
-            //POST: api/user/register
-            [HttpPost]
+        #endregion
+        #region Private methods
+        private bool UserExistsById(string id)
+        {
+            return _userRepository.UserExistsById(id);
+        }
+        private bool UserExistsByEmail(string email)
+        {
+            return _userRepository.UserExistsByEmail(email);
+        }
+        #endregion
+        #region Public methods
+        //POST: api/user/register
+        [HttpPost]
             [Route("register")]
             public async Task<IActionResult> Register(RegisterUserAC user)
             {
@@ -113,13 +129,6 @@ namespace Splitwise.Core.Controller
             }
             return BadRequest();
         }
-        private bool UserExistsById(string id)
-        {
-            return _userRepository.UserExistsById(id);
-        }
-        private bool UserExistsByEmail(string email)
-        {
-            return _userRepository.UserExistsByEmail(email);
-        }
+        #endregion
     }
 }

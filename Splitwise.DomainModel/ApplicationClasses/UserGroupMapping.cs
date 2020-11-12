@@ -6,7 +6,9 @@ namespace Splitwise.DomainModel.ApplicationClasses
 {
     public class UserGroupMapping
     {
+        #region Properties
         public string UserId { get; set; }
         public int GroupId { get; set; }
+        #endregion
     }
 }

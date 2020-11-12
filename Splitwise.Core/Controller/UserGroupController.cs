@@ -15,17 +15,35 @@ namespace Splitwise.Core.Controller
     [ApiController]
     public class UserGroupController : ControllerBase
     {
+        #region Private Variables
         private readonly IUserRepository _userRepository;
         private readonly IGroupRepository _groupRepository;
         private readonly IUserGroupRepository _usergroupRepository;
+        #endregion
 
+        #region Constructors
         public UserGroupController(IUserGroupRepository usergroupRepository, IGroupRepository groupRepository, IUserRepository userRepository)
         {
             this._userRepository = userRepository;
             this._groupRepository = groupRepository;
             this._usergroupRepository = usergroupRepository;
         }
-
+        #endregion
+        #region Private methods
+        private bool GroupExists(int id)
+        {
+            return _groupRepository.GroupExists(id);
+        }
+        private bool UserExistsById(string id)
+        {
+            return _userRepository.UserExistsById(id);
+        }
+        private bool GroupMemberExists(string userId, int groupId)
+        {
+            return _usergroupRepository.GroupMemberExists(userId, groupId);
+        }
+        #endregion
+        #region Public methods
         // GET: api/usergroup/groupbyuserid/id
         [HttpGet("groupByUserId/{userid}")]
         public async Task<ActionResult<IEnumerable<GroupAC>>> GetUserGroups(string userid)
@@ -94,18 +112,6 @@ namespace Splitwise.Core.Controller
             }
             return BadRequest();
         }
-
-        private bool GroupExists(int id)
-        {
-            return _groupRepository.GroupExists(id);
-        }
-        private bool UserExistsById(string id)
-        {
-            return _userRepository.UserExistsById(id);
-        }
-        private bool GroupMemberExists(string userId, int groupId)
-        {
-            return _usergroupRepository.GroupMemberExists(userId, groupId);
-        }
+        #endregion
     }
 }

@@ -14,17 +14,21 @@ namespace Splitwise.Repository.UserGroupRepository
 {
     public class UserGroupRepository : IUserGroupRepository
     {
+        #region Private Variables
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
+        #endregion
 
-
+        #region Constructors
         public UserGroupRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IMapper _mapper)
         {
             this._context = _context;
             this._userManager = _userManager;
             this._mapper = _mapper;
         }
+        #endregion
+        #region Public methods
         public async Task AddUserToGroup(string userId, int groupId)
         {
             if(!this.GroupMemberExists(userId, groupId))
@@ -70,6 +74,7 @@ namespace Splitwise.Repository.UserGroupRepository
                 await _context.SaveChangesAsync();
             }
         }
-            
+        #endregion
+
     }
 }

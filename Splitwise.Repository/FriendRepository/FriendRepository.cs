@@ -14,17 +14,21 @@ namespace Splitwise.Repository.FriendRepository
 {
     public class FriendRepository : IFriendRepository
     {
+        #region Private Variables
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
         private readonly IUserRepository _userRepository;
+        #endregion
 
-
+        #region Constructors
         public FriendRepository(SplitwiseDbContext _context, IMapper _mapper, IUserRepository userRepository)
         {
             this._context = _context;
             this._mapper = _mapper;
             this._userRepository = userRepository;
         }
+        #endregion
+        #region Public methods
         public async Task<UserAC> AddFriend(string userId, string userFriendEmail)
         {
             Friend friend = new Friend();
@@ -68,5 +72,6 @@ namespace Splitwise.Repository.FriendRepository
                     return null;
                 }
         }
+        #endregion
     }
 }

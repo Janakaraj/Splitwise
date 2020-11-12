@@ -6,6 +6,7 @@ namespace Splitwise.DomainModel.ApplicationClasses
 {
     public class PayeeAC
     {
+        #region Properties
         public int Id { get; set; }
         public int ExpenseId { get; set; }
         public ExpenseAC Expense { get; set; }
@@ -13,5 +14,6 @@ namespace Splitwise.DomainModel.ApplicationClasses
         public UserAC PayeeUser { get; set; }
         public double PayeeShare { get; set; }
         public double PayeeInitialShare { get; set; }
+        #endregion
     }
 }

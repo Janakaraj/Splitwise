@@ -7,6 +7,7 @@ namespace Splitwise.DomainModel.Models
 {
     public class Expense
     {
+        #region Properties
         public int ExpenseId { get; set; }
         public string  ExpenseName { get; set; }
         public double ExpenseTotalAmount { get; set; }
@@ -20,5 +21,6 @@ namespace Splitwise.DomainModel.Models
         public string ExpenseAdderId { get; set; }
         [ForeignKey("ExpenseAdderId")]
         public User ExpenseAdder { get; set; }
+        #endregion
     }
 }

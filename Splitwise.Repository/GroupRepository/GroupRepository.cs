@@ -15,12 +15,14 @@ namespace Splitwise.Repository.GroupRepository
 {
     public class GroupRepository : IGroupRepository
     {
+        #region Private Variables
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
         private readonly IUserGroupRepository _userGroupRepository;
+        #endregion
 
-
+        #region Constructors
         public GroupRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IMapper _mapper, IUserGroupRepository userGroupRepository)
         {
             this._context = _context;
@@ -28,6 +30,8 @@ namespace Splitwise.Repository.GroupRepository
             this._mapper = _mapper;
             this._userGroupRepository = userGroupRepository;
         }
+        #endregion
+        #region Public methods
         public async Task<GroupAC> CreateGroup(GroupAC group)
         {
             var groupName = group.GroupName;
@@ -70,5 +74,6 @@ namespace Splitwise.Repository.GroupRepository
             this._context.Groups.Update(groupToUpdate);
             await _context.SaveChangesAsync();
         }
+        #endregion
     }
 }

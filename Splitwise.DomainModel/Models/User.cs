@@ -7,6 +7,8 @@ namespace Splitwise.DomainModel.Models
 {
     public class User : IdentityUser
     {
+        #region Properties
         public string UserFullName { get; set; }
+        #endregion
     }
 }

@@ -17,11 +17,15 @@ namespace Splitwise.Repository.SettlementRepository
 {
     public class SettlementRepository : ISettlementRepository
     {
+        #region Private Variables
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
         private readonly IPayerRepository _payerRepository;
         private readonly IPayeeRepository _payeeRepository;
+        #endregion
+
+        #region Constructors
         public SettlementRepository(SplitwiseDbContext context, UserManager<User> userManager, IMapper mapper, IPayerRepository payerRepository, IPayeeRepository payeeRepository)
         {
             this._context = context;
@@ -30,6 +34,8 @@ namespace Splitwise.Repository.SettlementRepository
             this._payerRepository = payerRepository;
             this._payeeRepository = payeeRepository;
         }
+        #endregion
+        #region Public methods
         public async Task AddSettlement(SettlementAC settlement)
         {
             this._context.Settlements.Add(this._mapper.Map<Settlement>(settlement));
@@ -91,5 +97,6 @@ namespace Splitwise.Repository.SettlementRepository
             this._context.Settlements.Update(settlementToUpdate);
             await _context.SaveChangesAsync();
         }
+        #endregion
     }
 }

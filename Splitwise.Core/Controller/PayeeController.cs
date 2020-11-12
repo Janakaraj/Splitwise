@@ -12,13 +12,23 @@ namespace Splitwise.Core.Controller
     [ApiController]
     public class PayeeController : ControllerBase
     {
+        #region Private Variables
         private readonly IPayeeRepository _payeeRepository;
+        #endregion
 
+        #region Constructors
         public PayeeController(IPayeeRepository payeeRepository)
         {
             this._payeeRepository = payeeRepository;
         }
-
+        #endregion
+        #region Private methods
+        private bool PayeeExists(string id)
+        {
+            return _payeeRepository.PayeeExists(id);
+        }
+        #endregion
+        #region Public methods
         // GET: api/payee/payeebyexpenseid/2
         [HttpGet("payeeByExpenseId/{expenseId}")]
         public async Task<ActionResult<IEnumerable<PayeeAC>>> GetPayeesByExpenseId(int expenseId)
@@ -81,10 +91,6 @@ namespace Splitwise.Core.Controller
             }
             return NotFound();
         }
-
-        private bool PayeeExists(string id)
-        {
-            return _payeeRepository.PayeeExists(id);
-        }
+        #endregion
     }
 }

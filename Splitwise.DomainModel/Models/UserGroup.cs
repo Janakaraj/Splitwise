@@ -7,6 +7,7 @@ namespace Splitwise.DomainModel.Models
 {
     public class UserGroup
     {
+        #region Properties
         public int Id { get; set; }
         public string UserId { get; set; }
         [ForeignKey("UserId")]
@@ -14,5 +15,6 @@ namespace Splitwise.DomainModel.Models
         public int GroupId { get; set; }
         [ForeignKey("GroupId")]
         public Group Group { get; set; }
+        #endregion
     }
 }

@@ -6,7 +6,9 @@ namespace Splitwise.DomainModel.ApplicationClasses
 {
     public class LoginUserAC
     {
+        #region Properties
         public string UserEmail { get; set; }
         public string UserPassword { get; set; }
+        #endregion
     }
 }

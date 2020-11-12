@@ -6,10 +6,12 @@ namespace Splitwise.DomainModel.ApplicationClasses
 {
     public class UserGroupAC
     {
+        #region Properties
         public int Id { get; set; }
         public int GroupId { get; set; }
         public GroupAC Group { get; set; }
         public string UserId { get; set; }
         public UserAC User { get; set; }
+        #endregion
     }
 }

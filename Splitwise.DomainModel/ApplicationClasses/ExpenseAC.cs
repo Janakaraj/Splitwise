@@ -6,6 +6,7 @@ namespace Splitwise.DomainModel.ApplicationClasses
 {
     public class ExpenseAC
     {
+        #region Properties
         public int ExpenseId { get; set; }
         public string ExpenseName { get; set; }
         public double ExpenseTotalAmount { get; set; }
@@ -17,5 +18,6 @@ namespace Splitwise.DomainModel.ApplicationClasses
         public string ExpenseAddTimeStamp { get; set; }
         public string ExpenseAdderId { get; set; }
         public UserAC ExpenseAdder { get; set; }
+        #endregion
     }
 }

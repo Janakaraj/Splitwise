@@ -14,15 +14,19 @@ namespace Splitwise.Repository.PayeeRepository
 {
     public class PayeeRepository : IPayeeRepository
     {
+        #region Private Variables
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
+        #endregion
 
-
+        #region Constructors
         public PayeeRepository(SplitwiseDbContext _context, IMapper _mapper)
         {
             this._context = _context;
             this._mapper = _mapper;
         }
+        #endregion
+        #region Public methods
         public async Task AddPayee(PayeeAC payee)
         {
             this._context.Payees.Add(this._mapper.Map<Payee>(payee));
@@ -68,5 +72,6 @@ namespace Splitwise.Repository.PayeeRepository
             this._context.Payees.Update(payeeToUpdate);
             await _context.SaveChangesAsync();
         }
+        #endregion
     }
 }

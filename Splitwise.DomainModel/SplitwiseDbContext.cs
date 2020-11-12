@@ -11,10 +11,7 @@ namespace Splitwise.DomainModel
 {
     public class SplitwiseDbContext : IdentityDbContext<User>
     {
-        public SplitwiseDbContext(DbContextOptions<SplitwiseDbContext> options) : base(options)
-        {
-
-        }
+        #region Properties
         public DbSet<Group> Groups { get; set; }
         public DbSet<UserGroup> UserGroups { get; set; }
         public DbSet<Friend> Friends { get; set; }
@@ -22,5 +19,12 @@ namespace Splitwise.DomainModel
         public DbSet<Payer> Payers { get; set; }
         public DbSet<Payee> Payees { get; set; }
         public DbSet<Settlement> Settlements { get; set; }
+        #endregion
+        #region Public methods
+        public SplitwiseDbContext(DbContextOptions<SplitwiseDbContext> options) : base(options)
+        {
+
+        }
+        #endregion
     }
 }

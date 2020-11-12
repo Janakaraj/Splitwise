@@ -19,13 +19,15 @@ namespace Splitwise.Repository.UserRepository
 {
     public class UserRepository:IUserRepository
     {
+        #region Private Variables
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly SplitwiseDbContext _context;
         private readonly IGroupRepository _groupRepository;
+        #endregion
 
-
+        #region Constructors
         public UserRepository(SplitwiseDbContext _context, UserManager<User> _userManager, IConfiguration _configuration, IMapper _mapper, IGroupRepository groupRepository)
         {
             this._context = _context;
@@ -34,6 +36,9 @@ namespace Splitwise.Repository.UserRepository
             this._mapper = _mapper;
             this._groupRepository = groupRepository;
         }
+        #endregion
+
+        #region Public methods
         public async Task<IEnumerable<UserAC>> GetUsers() {
             var users = await this._userManager.Users.ToListAsync();
             return this._mapper.Map<IEnumerable<UserAC>>(users);
@@ -129,5 +134,6 @@ namespace Splitwise.Repository.UserRepository
             }
             return null;
         }
+        #endregion
     }
 }

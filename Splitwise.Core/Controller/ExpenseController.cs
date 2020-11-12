@@ -12,13 +12,23 @@ namespace Splitwise.Core.Controller
     [ApiController]
     public class ExpenseController : ControllerBase
     {
+        #region Private Variables
         private readonly IExpenseRepository _expenseRepository;
+        #endregion
 
+        #region Constructors
         public ExpenseController(IExpenseRepository expenseRepository)
         {
             this._expenseRepository = expenseRepository;
         }
-
+        #endregion
+        #region Private methods
+        private bool ExpenseExists(int id)
+        {
+            return _expenseRepository.ExpenseExists(id);
+        }
+        #endregion
+        #region Public methods
         // GET: api/expense
         [HttpGet("getExpensesByGroupId/{groupId}")]
         public async Task<ActionResult<IEnumerable<ExpenseAC>>> GetexpensesByGroupId([FromRoute] int groupId)
@@ -88,10 +98,6 @@ namespace Splitwise.Core.Controller
             }
             return NotFound();
         }
-
-        private bool ExpenseExists(int id)
-        {
-            return _expenseRepository.ExpenseExists(id);
-        }
+        #endregion
     }
 }
