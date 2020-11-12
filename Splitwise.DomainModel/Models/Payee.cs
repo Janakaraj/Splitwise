@@ -15,5 +15,6 @@ namespace Splitwise.DomainModel.Models
         [ForeignKey("PayeeId")]
         public User PayeeUser { get; set; }
         public double PayeeShare { get; set; }
+        public double PayeeInitialShare { get; set; }
     }
 }

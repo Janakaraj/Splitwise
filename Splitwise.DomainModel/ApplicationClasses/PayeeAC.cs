@@ -12,5 +12,6 @@ namespace Splitwise.DomainModel.ApplicationClasses
         public string PayeeId { get; set; }
         public UserAC PayeeUser { get; set; }
         public double PayeeShare { get; set; }
+        public double PayeeInitialShare { get; set; }
     }
 }
