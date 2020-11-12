@@ -62,7 +62,7 @@ namespace Splitwise.Core.Controller
             }
             // GET: api/user/5
             [HttpGet("{id}")]
-            public async Task<IActionResult> GetUser([FromRoute] string id)
+            public async Task<ActionResult<UserAC>> GetUser([FromRoute] string id)
             {
                 var users = await this._userRepository.GetUser(id);
 
